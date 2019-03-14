@@ -4,10 +4,10 @@ from kafka import KafkaConsumer, KafkaProducer
 from datetime import datetime,timedelta
 
 #setting up twitter authentication details
-access_key = "183318037-X55KeNRcwNIUlXQNvFxTFWxCIiXIjmXtKboT7hPQ "
-access_secret = "FXH25B24OcdW54ilKDxcee274aqfNNj9C3Ps1J9bVWeOO"
-consumer_key = "qMplSgIp0ekz3Lpjs3w4tKQjE"
-consumer_secret = "FI8ulEiCWiThkfxlK18LLcYe8kXLzOJsFzKksMorhncNJ76hIQ "
+access_key = "183318037-X55KeNRcwNIUlXQNvFxTFWxCIiXIjmXtKboT "
+access_secret = "FXH25B24OcdW54ilKDxcee274aqfNNj9C3Ps1J9bVW"
+consumer_key = "qMplSgIp0ekz3Lpjs3w4tKQ"
+consumer_secret = "FI8ulEiCWiThkfxlK18LLcYe8kXLzOJsFzKksMorhncNJ "
 
 
 #creating authentication object
@@ -21,7 +21,6 @@ def normalize_timestamp(time):
     mytime= datetime.strptime(time,"%Y-%m-%d %H:%M:%S")
     mytime+= timedelta(hours=1)
     return (mytime.strftime(("%Y-%m-%d %H:%M:%S")))
-
 
 producer = KafkaProducer(bootstrap_servers='localhost:9092')
 topic_name = 'tweets-lambda1'
@@ -46,11 +45,9 @@ def get_twitter_data():
 
 get_twitter_data()
 
-
 def periodic_work(interval):
     while True:
         get_twitter_data()
         #interval should be an integer, the number of seconds to wait
         time.sleep(interval)
-
 periodic_work(60*1)  # get data every couple of minutes
