@@ -18,8 +18,9 @@ class tweetlistener(StreamListener):
 		super(tweepy.StreamListener, self).__init__()
 		client = KafkaClient("localhost:9092")
 		print(client)
+
 		#https://kafka-python.readthedocs.io/en/1.0.1/apidoc/SimpleProducer.html
-		self.producer = SimpleProducer(client, async_send = True, batch_send_every_n = 1000, batch_send_every_t = 10)
+		self.producer = SimpleProducer(client, async = True, batch_send_every_n = 1000, batch_send_every_t = 10)
 		print("after init producer")
 
 	#printout data
@@ -89,7 +90,7 @@ def search_tweets():
 	for indiv in search_words_list:
 		print("Search word - " + indiv + " -is being processed")
 		counter = 0
-		file =  str(indiv) + ".txt"
+		file = "/Users/hanxu/Desktop/TeamSimple/tweettext_" + str(indiv) + ".txt"
 		outfile = codecs.open(file, 'w', "utf-8")
 		twitterStream = Stream(auth, tweetlistener(api)) 
 		one_list = []
