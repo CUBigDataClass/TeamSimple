@@ -28,10 +28,11 @@ class tweetlistener(StreamListener):
 		global counter, total_tweet_count, outfile, search_words_list, indiv 
 
 		counter += 1
-		if counter >= total_tweet_count:
-			search_words_list.pop(0)
-			outfile.close()
-			search_tweets()
+		print(counter)
+		#if counter >= total_tweet_count:
+			#search_words_list.pop(0)
+			#outfile.close()
+			#search_tweets()
 
 		print("--------NEW TWEET ARRIVED---------")
 		print("Tweet Text: %s" %status.text)
@@ -64,7 +65,7 @@ def main():
 	#search_words = str(raw_input("Enter the word to search: "))
 	#total_tweet_count = int(raw_input("No of tweets to be pulled for the search word: "))
 	search_words = "hello"
-	total_tweet_count = 10
+	#total_tweet_count = 10
 
 	print(search_words)
 
@@ -73,6 +74,7 @@ def main():
 	print(search_words_list)
 
 	search_tweets()
+
 
 def search_tweets():
 	global search_words_list, counter, auth, indiv, outfile, file, access_key
