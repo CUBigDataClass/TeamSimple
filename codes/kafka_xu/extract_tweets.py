@@ -98,7 +98,7 @@ def search_tweets():
 		one_list = []
 		one_list.append(indiv)
 		print(one_list)
-		twitterStream.filter(track=one_list, languages=['en'])
+		twitterStream.filter()
 
 	sys.exit()
 

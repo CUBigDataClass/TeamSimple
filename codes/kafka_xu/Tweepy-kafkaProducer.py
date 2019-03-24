@@ -5,11 +5,11 @@ from kafka import KafkaConsumer, KafkaProducer
 from kafka import SimpleProducer, KafkaClient
 import datetime
 import codecs
-from tweepy import StreamListener
+from tweepy import StreamListener,Stream
 
 #twitter setup
 config = {}
-exec(compile(open("config.py", "rb").read(), "config.py", 'exec'), config)
+exec(compile(open("config1.py", "rb").read(), "config.py", 'exec'), config)
 consumer_key = config["consumer_key"]
 consumer_secret = config["consumer_secret"]
 access_token = config["access_key"]
@@ -31,33 +31,72 @@ kafka = KafkaClient("localhost:9092")
 producer = SimpleProducer(kafka)
 
 #twitter api to kafka
-class StreamListener(tweepy.StreamListener):
+
+'''class tweetlistener(StreamListener):
+    def __init__(self, api):
+        self.api = api
+        super(tweepy.StreamListener, self).__init__()
+        client = KafkaClient("localhost:9092")
+        #print(client)
+
+        #https://kafka-python.readthedocs.io/en/1.0.1/apidoc/SimpleProducer.html
+        self.producer = SimpleProducer(client, async = True, batch_send_every_n = 1000, batch_send_every_t = 10)
+        print("after init producer")
 
     def on_status(self, status):
-        print(status.text)
+        global file, outfile, counter
+
+        print(counter)
+        counter += 1
+        record = ''
+        record += str(status.text)
+        record += ';'
+        record += str(status.created_at)
+           
+        print(record)
+        print('------------------------------------------------------------------------')    
+        outfile.write(record)
+        outfile.write('------------------------------------------------------------------------')
+        outfile.write(str("\n"))
+
+        #send data using kafka producer to kafka topic
+        msg = status.text.encode("utf-8")
+        try:
+            self.producer.send_messages('kafkatwitterstream',msg)
+        except Exception as e:
+            print(e)
+            return False
+        return True
         
     def on_error(self, status_code):
         if status_code == 420:
-            return False
-
-stream_listener = StreamListener()
-stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
-stream.filter(track=["google"],languages=["en"])
-
+            return False'''
 
 '''def get_twitter_data():
+    global file, outfile, counter
+    indiv = "and"
+    counter = 0
+    file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + ".txt"
+    outfile = codecs.open(file, 'w', "utf-8")
+    twitterStream = Stream(auth, tweetlistener(api)) 
+    twitterStream.filter()'''
+
+
+def get_twitter_data():
     indiv = "and"
     count = 0
     file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
-    for t in tweepy.Cursor(api.search, q = str(indiv), include_entities=True, since = currentTime).items(10000):
+    a = tweepy.Cursor(api.search, q = str(indiv), since = currentTime).items(10000)
+    now = datetime.datetime.utcnow()
+    for t in a:
         shouldContinue = True
         tweetTime = t.created_at # get the current time of the tweet
-        now = datetime.datetime.utcnow()
+        
         interval = now - tweetTime # subtract tweetTime from currentTime
         count += 1
-        if interval.seconds <= 20: #get interval in seconds and use your time constraint in seconds (mine is 1hr and 5 mins = 3900secs)
+        if interval.seconds <= 21: #get interval in seconds and use your time constraint in seconds (mine is 1hr and 5 mins = 3900secs)
             record = ''
             record += str(t.text)
             record += ';'
@@ -95,11 +134,11 @@ stream.filter(track=["google"],languages=["en"])
             print('exiting the loop')
             break
     print(count)
-    '''
 
 #get twitter data every 6 secs
 def periodic_work(interval):
     global call_api_count 
+    global file, outfile, counter
     call_api_count = 0
     #print(call_api_count)
     while True:
@@ -108,5 +147,4 @@ def periodic_work(interval):
         #interval should be an integer, the number of seconds to wait
         time.sleep(interval)
 
-#periodic_work(6)
-
+periodic_work(180)
