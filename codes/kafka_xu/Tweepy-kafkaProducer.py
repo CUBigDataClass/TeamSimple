@@ -9,7 +9,7 @@ from tweepy import StreamListener,Stream
 
 #twitter setup
 config = {}
-exec(compile(open("config1.py", "rb").read(), "config.py", 'exec'), config)
+exec(compile(open("config.py", "rb").read(), "config.py", 'exec'), config)
 consumer_key = config["consumer_key"]
 consumer_secret = config["consumer_secret"]
 access_token = config["access_key"]
@@ -88,7 +88,7 @@ def get_twitter_data():
     file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
-    a = tweepy.Cursor(api.search, q = str(indiv), since = currentTime).items(10000)
+    a = tweepy.Cursor(api.search, q = str(indiv), since = currentTime).items(3000)
     now = datetime.datetime.utcnow()
     for t in a:
         shouldContinue = True
@@ -147,4 +147,4 @@ def periodic_work(interval):
         #interval should be an integer, the number of seconds to wait
         time.sleep(interval)
 
-periodic_work(180)
+periodic_work(600)
