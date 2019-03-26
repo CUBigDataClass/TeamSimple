@@ -27,6 +27,16 @@ access_secret2 = config2["access_secret"]
 auth2 = OAuthHandler(consumer_key2, consumer_secret2)
 auth2.set_access_token(access_token2, access_secret2)
 api2 = tweepy.API(auth2)
+
+config3 = {}
+exec(compile(open("config2.py", "rb").read(), "config2.py", 'exec'), config3)
+consumer_key3 = config3["consumer_key"]
+consumer_secret3 = config3["consumer_secret"]
+access_token3 = config3["access_key"]
+access_secret3 = config3["access_secret"]
+auth3 = OAuthHandler(consumer_key3, consumer_secret3)
+auth3.set_access_token(access_token3, access_secret3)
+api3 = tweepy.API(auth3)
 #normalize timestamp
 #def normalize_timestamp(time):
     #mytime = datetime.strptime(time, "%Y-%m-%d %H:%M:%S")
@@ -116,7 +126,9 @@ def get_twitter_data_token1():
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('kafkatwitterstream', record)
+                #print(record)
             except Exception as e:
                 print(e)
                 break
@@ -132,7 +144,8 @@ def get_twitter_data_token1():
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                producer.send_messages('kafkatwitterstream_'+ str(indiv),t.text.encode("utf-8"))
+                #producer.send_messages('kafkatwitterstream_'+ str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('kafkatwitterstream', record)
             except Exception as e:
                 print(e)
                 break
@@ -170,7 +183,8 @@ def get_twitter_data_token2():
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
+                #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('kafkatwitterstream', record)
             except Exception as e:
                 print(e)
                 break
@@ -186,7 +200,8 @@ def get_twitter_data_token2():
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                producer.send_messages('kafkatwitterstream2_'+ str(indiv),t.text.encode("utf-8"))
+                #producer.send_messages('kafkatwitterstream2_'+ str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('kafkatwitterstream', record)
             except Exception as e:
                 print(e)
                 break
@@ -198,6 +213,62 @@ def get_twitter_data_token2():
             break
     print("token2:"+ str(count))
 
+
+def get_twitter_data_token3():
+    indiv = "and"
+    count = 0
+    file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
+    outfile = codecs.open(file, 'w', "utf-8")
+    currentTime = str(datetime.datetime.utcnow().date())
+    a = tweepy.Cursor(api3.search, q = str(indiv), since = currentTime).items(3000)
+    now = datetime.datetime.utcnow()
+    for t in a:
+        shouldContinue = True
+        tweetTime = t.created_at # get the current time of the tweet
+        
+        interval = now - tweetTime # subtract tweetTime from currentTime
+        count += 1
+        if interval.seconds <= 21: #get interval in seconds and use your time constraint in seconds (mine is 1hr and 5 mins = 3900secs)
+            record = ''
+            record += str(t.text)
+            record += ';'
+            record += str(t.created_at)
+            
+            outfile.write(str(now))
+            outfile.write(record)
+            outfile.write('------------------------------------------------------------------------')
+            outfile.write(str("\n"))
+            try:
+                #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('kafkatwitterstream', record)
+            except Exception as e:
+                print(e)
+                break
+        else:
+            shouldContinue = False
+            record = ''
+            record += str(t.text)
+            record += ';'
+            record += str(t.created_at)
+    
+            outfile.write(str(now))
+            outfile.write(record)
+            outfile.write('------------------------------------------------------------------------')
+            outfile.write(str("\n"))
+            try:
+                #producer.send_messages('kafkatwitterstream2_'+ str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('kafkatwitterstream', record)
+            except Exception as e:
+                print(e)
+                break
+
+        #print('\n')
+
+        if not shouldContinue: # check if tweet is still within time range. Tweet returned are ordered according to recent already.
+            print('exiting the loop')
+            break
+    print("token3:"+ str(count))
+
 #get twitter data every 6 secs
 def periodic_work(interval):
     global call_api_count 
@@ -206,11 +277,11 @@ def periodic_work(interval):
     #print(call_api_count)
     while True:
         get_twitter_data_token1()
-        call_api_count += 1
         #interval should be an integer, the number of seconds to wait
         time.sleep(interval)
         get_twitter_data_token2()
-        call_api_count += 1
+        time.sleep(interval)
+        get_twitter_data_token3()
         time.sleep(interval)
 
-periodic_work(450)
+periodic_work(300)

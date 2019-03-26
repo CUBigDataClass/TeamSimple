@@ -2,6 +2,7 @@ import tweepy
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy import StreamListener
+from kafka import KafkaConsumer
 import json
 import sys
 import webbrowser
@@ -34,13 +35,14 @@ class tweetlistener(StreamListener):
 			#outfile.close()
 			#search_tweets()
 
-		print("--------NEW TWEET ARRIVED---------")
-		print("Tweet Text: %s" %status.text)
+		#print("--------NEW TWEET ARRIVED---------")
+		#print("Tweet Text: %s" %status.text)
 		outfile.write(status.text)
+		outfile.write(str(status.geo))
 		outfile.write(str("\n"))
-		print("Author's screen name: %s" %status.author.screen_name)
-		print("Time of creation: %s" %status.created_at)
-		print("Source of tweet: %s" %status.source)
+		#print("Author's screen name: %s" %status.author.screen_name)
+		#print("Time of creation: %s" %status.created_at)
+		#print("geo of tweet: %s" %status.geo)
 
 		#send data using kafka producer to kafka topic
 		msg = status.text.encode("utf-8")
@@ -74,6 +76,7 @@ def main():
 	print(search_words_list)
 
 	search_tweets()
+	
 
 
 def search_tweets():
@@ -98,7 +101,7 @@ def search_tweets():
 		one_list = []
 		one_list.append(indiv)
 		print(one_list)
-		twitterStream.filter()
+		twitterStream.filter(track=["hello"])
 
 	sys.exit()
 
