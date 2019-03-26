@@ -130,7 +130,7 @@ def get_twitter_data_token1():
             outfile.write(str("\n"))
             try:
                 #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es', record.encode("utf-8"))
+                producer.send_messages('es_test', record.encode("utf-8"))
                 #print(record)
             except Exception as e:
                 print(e)
@@ -148,7 +148,7 @@ def get_twitter_data_token1():
             outfile.write(str("\n"))
             try:
                 #producer.send_messages('kafkatwitterstream_'+ str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es', record.encode("utf-8"))
+                producer.send_messages('es_test', record.encode("utf-8"))
             except Exception as e:
                 print(e)
                 break
@@ -187,7 +187,7 @@ def get_twitter_data_token2():
             outfile.write(str("\n"))
             try:
                 #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es', record.encode("utf-8"))
+                producer.send_messages('es_test', record.encode("utf-8"))
                 #print(record)
             except Exception as e:
                 print(e)
@@ -205,7 +205,7 @@ def get_twitter_data_token2():
             outfile.write(str("\n"))
             try:
                 #producer.send_messages('kafkatwitterstream2_'+ str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es', record.encode("utf-8"))
+                producer.send_messages('es_test', record.encode("utf-8"))
             except Exception as e:
                 print(e)
                 break
@@ -244,7 +244,7 @@ def get_twitter_data_token3():
             outfile.write(str("\n"))
             try:
                 #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es', record.encode("utf-8"))
+                producer.send_messages('es_test', record.encode("utf-8"))
                 #print(record)
             except Exception as e:
                 print(e)
@@ -262,7 +262,7 @@ def get_twitter_data_token3():
             outfile.write(str("\n"))
             try:
                 #producer.send_messages('kafkatwitterstream2_'+ str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es', record.encode("utf-8"))
+                producer.send_messages('es_test', record.encode("utf-8"))
             except Exception as e:
                 print(e)
                 break
@@ -281,12 +281,12 @@ def periodic_work(interval):
     call_api_count = 0
     #print(call_api_count)
     while True:
-        get_twitter_data_token2()
+        get_twitter_data_token1()
         #interval should be an integer, the number of seconds to wait
         time.sleep(interval)
-        get_twitter_data_token3()
+        get_twitter_data_token2()
         time.sleep(interval)
-        get_twitter_data_token1()
+        get_twitter_data_token3()
         time.sleep(interval)
 
 periodic_work(300)

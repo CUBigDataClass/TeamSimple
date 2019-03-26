@@ -15,7 +15,7 @@ from elasticsearch import helpers
 consumer = KafkaConsumer(bootstrap_servers='localhost:9092',
 						auto_offset_reset='earliest',
 						group_id='es')
-consumer.subscribe('es')
+consumer.subscribe('es_test')
 
 #print(consumer)
 	
