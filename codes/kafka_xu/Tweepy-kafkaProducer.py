@@ -8,6 +8,7 @@ import codecs
 from tweepy import StreamListener,Stream
 
 #twitter setup
+'''
 config = {}
 exec(compile(open("config.py", "rb").read(), "config.py", 'exec'), config)
 consumer_key = config["consumer_key"]
@@ -18,6 +19,7 @@ auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
+
 config2 = {}
 exec(compile(open("config1.py", "rb").read(), "config1.py", 'exec'), config2)
 consumer_key2 = config2["consumer_key"]
@@ -27,9 +29,10 @@ access_secret2 = config2["access_secret"]
 auth2 = OAuthHandler(consumer_key2, consumer_secret2)
 auth2.set_access_token(access_token2, access_secret2)
 api2 = tweepy.API(auth2)
+'''
 
 config3 = {}
-exec(compile(open("config2.py", "rb").read(), "config2.py", 'exec'), config3)
+exec(compile(open("config3.py", "rb").read(), "config3.py", 'exec'), config3)
 consumer_key3 = config3["consumer_key"]
 consumer_secret3 = config3["consumer_secret"]
 access_token3 = config3["access_key"]
@@ -101,7 +104,7 @@ producer = SimpleProducer(kafka)
     twitterStream.filter()'''
 
 
-def get_twitter_data_token1():
+'''def get_twitter_data_token1():
     indiv = "and"
     count = 0
     file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
@@ -128,7 +131,7 @@ def get_twitter_data_token1():
             try:
                 #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
                 producer.send_messages('kafkatwitterstream', record)
-                #print(record)
+                print(record)
             except Exception as e:
                 print(e)
                 break
@@ -185,6 +188,7 @@ def get_twitter_data_token2():
             try:
                 #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
                 producer.send_messages('kafkatwitterstream', record)
+                print(record)
             except Exception as e:
                 print(e)
                 break
@@ -212,7 +216,7 @@ def get_twitter_data_token2():
             print('exiting the loop')
             break
     print("token2:"+ str(count))
-
+'''
 
 def get_twitter_data_token3():
     indiv = "and"
@@ -241,6 +245,7 @@ def get_twitter_data_token3():
             try:
                 #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
                 producer.send_messages('kafkatwitterstream', record)
+                print(record)
             except Exception as e:
                 print(e)
                 break
@@ -276,12 +281,12 @@ def periodic_work(interval):
     call_api_count = 0
     #print(call_api_count)
     while True:
-        get_twitter_data_token1()
+        get_twitter_data_token3()
         #interval should be an integer, the number of seconds to wait
         time.sleep(interval)
-        get_twitter_data_token2()
-        time.sleep(interval)
-        get_twitter_data_token3()
-        time.sleep(interval)
+        #get_twitter_data_token1()
+        #time.sleep(interval)
+        #get_twitter_data_token2()
+        #time.sleep(interval)
 
 periodic_work(300)
