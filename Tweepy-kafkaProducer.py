@@ -107,7 +107,8 @@ producer = SimpleProducer(kafka)
 def get_twitter_data_token1():
     indiv = "and"
     count = 0
-    file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
+    file = "/home/yichen/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
     a = tweepy.Cursor(api.search, q = str(indiv), since = currentTime).items(3000)
@@ -164,7 +165,8 @@ def get_twitter_data_token1():
 def get_twitter_data_token2():
     indiv = "and"
     count = 0
-    file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
+    file = "/home/yichen/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
     a = tweepy.Cursor(api2.search, q = str(indiv), since = currentTime).items(3000)
@@ -221,7 +223,8 @@ def get_twitter_data_token2():
 def get_twitter_data_token3():
     indiv = "and"
     count = 0
-    file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
+    file = "/home/yichen/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
     a = tweepy.Cursor(api3.search, q = str(indiv), since = currentTime).items(3000)
