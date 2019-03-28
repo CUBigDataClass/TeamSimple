@@ -6,6 +6,7 @@ from kafka import SimpleProducer, KafkaClient
 import datetime
 import codecs
 from tweepy import StreamListener,Stream
+import json
 
 #twitter setup
 
@@ -107,7 +108,7 @@ producer = SimpleProducer(kafka)
 def get_twitter_data_token1():
     indiv = "and"
     count = 0
-    file = "/home/yichen/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
     #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
@@ -120,40 +121,42 @@ def get_twitter_data_token1():
         interval = now - tweetTime # subtract tweetTime from currentTime
         count += 1
         if interval.seconds <= 21: #get interval in seconds and use your time constraint in seconds (mine is 1hr and 5 mins = 3900secs)
-            record = ''
-            record += str(t.text)
-            record += ';'
-            record += str(t.created_at)
+            record = '{'
+            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+            record += ','
+            record += "\"text\":" +  json.dumps(str(t.text))
+            record += '}'
             
             outfile.write(str(now))
             outfile.write(record)
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es_test', record.encode("utf-8"))
-                #print(record)
+                    #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('tweepy-kafka-test1', str.encode(record))
+            #print(record)
             except Exception as e:
                 print(e)
                 break
         else:
             shouldContinue = False
-            record = ''
-            record += str(t.text)
-            record += ';'
-            record += str(t.created_at)
-    
+            record = '{'
+            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+            record += ','
+            record += "\"text\":" +  json.dumps(str(t.text))
+            record += '}'
+            
             outfile.write(str(now))
             outfile.write(record)
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                #producer.send_messages('kafkatwitterstream_'+ str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es_test', record.encode("utf-8"))
+                    #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('tweepy-kafka-test1', str.encode(record))
+            #print(record)
             except Exception as e:
                 print(e)
                 break
-
         #print('\n')
 
         if not shouldContinue: # check if tweet is still within time range. Tweet returned are ordered according to recent already.
@@ -165,7 +168,7 @@ def get_twitter_data_token1():
 def get_twitter_data_token2():
     indiv = "and"
     count = 0
-    file = "/home/yichen/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
     #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
@@ -178,36 +181,39 @@ def get_twitter_data_token2():
         interval = now - tweetTime # subtract tweetTime from currentTime
         count += 1
         if interval.seconds <= 21: #get interval in seconds and use your time constraint in seconds (mine is 1hr and 5 mins = 3900secs)
-            record = ''
-            record += str(t.text)
-            record += ';'
-            record += str(t.created_at)
+            record = '{'
+            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+            record += ','
+            record += "\"text\":" +  json.dumps(str(t.text))
+            record += '}'
             
             outfile.write(str(now))
             outfile.write(record)
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es_test', record.encode("utf-8"))
-                #print(record)
+                    #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('tweepy-kafka-test1', str.encode(record))
+            #print(record)
             except Exception as e:
                 print(e)
                 break
         else:
             shouldContinue = False
-            record = ''
-            record += str(t.text)
-            record += ';'
-            record += str(t.created_at)
-    
+            record = '{'
+            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+            record += ','
+            record += "\"text\":" +  json.dumps(str(t.text))
+            record += '}'
+            
             outfile.write(str(now))
             outfile.write(record)
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                #producer.send_messages('kafkatwitterstream2_'+ str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es_test', record.encode("utf-8"))
+                    #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('tweepy-kafka-test1', str.encode(record))
+            #print(record)
             except Exception as e:
                 print(e)
                 break
@@ -223,7 +229,7 @@ def get_twitter_data_token2():
 def get_twitter_data_token3():
     indiv = "and"
     count = 0
-    file = "/home/yichen/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
     #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
@@ -236,36 +242,39 @@ def get_twitter_data_token3():
         interval = now - tweetTime # subtract tweetTime from currentTime
         count += 1
         if interval.seconds <= 21: #get interval in seconds and use your time constraint in seconds (mine is 1hr and 5 mins = 3900secs)
-            record = ''
-            record += str(t.text)
-            record += ';'
-            record += str(t.created_at)
+            record = '{'
+            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+            record += ','
+            record += "\"text\":" +  json.dumps(str(t.text))
+            record += '}'
             
             outfile.write(str(now))
             outfile.write(record)
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                #producer.send_messages('kafkatwitterstream2_' + str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es_test', record.encode("utf-8"))
-                #print(record)
+                    #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('tweepy-kafka-test1', str.encode(record))
+            #print(record)
             except Exception as e:
                 print(e)
                 break
         else:
             shouldContinue = False
-            record = ''
-            record += str(t.text)
-            record += ';'
-            record += str(t.created_at)
-    
+            record = '{'
+            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+            record += ','
+            record += "\"text\":" +  json.dumps(str(t.text))
+            record += '}'
+            
             outfile.write(str(now))
             outfile.write(record)
             outfile.write('------------------------------------------------------------------------')
             outfile.write(str("\n"))
             try:
-                #producer.send_messages('kafkatwitterstream2_'+ str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('es_test', record.encode("utf-8"))
+                    #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('tweepy-kafka-test1', str.encode(record))
+            #print(record)
             except Exception as e:
                 print(e)
                 break

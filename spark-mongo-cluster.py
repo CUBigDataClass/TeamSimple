@@ -16,7 +16,7 @@ from elasticsearch import helpers
 
 
 from pyspark.sql import SparkSession
-my_spark = SparkSession     .builder     .appName("myApp")     .config("spark.mongodb.input.uri", "mongodb://127.0.0.1/mydatabase.tweets_test")     .config("spark.mongodb.output.uri", "mongodb://127.0.0.1/mydatabase.tweets_test")     .config("spark.io.compression.codec", "snappy").getOrCreate() #this line's config is for solving lz4 error
+my_spark = SparkSession.builder.appName("myApp").config("spark.mongodb.input.uri", "mongodb://127.0.0.1/mydatabase.tweets_test")     .config("spark.mongodb.output.uri", "mongodb://127.0.0.1/mydatabase.tweets_test")     .config("spark.io.compression.codec", "snappy").getOrCreate() #this line's config is for solving lz4 error
 dataFrame=my_spark.read.format("com.mongodb.spark.sql.DefaultSource").load()
 dataFrame.printSchema()
 
@@ -71,7 +71,7 @@ for item in dataToKibana:
 
 # In[9]:
 
-
+#transport data to elasticsearch
 es = Elasticsearch(hosts='http://localhost',port=9200)
 actions = []
 mappings = {
@@ -86,7 +86,7 @@ mappings = {
             }
     }
 }
-es.indices.create(index="loc11", body=mappings)
+es.indices.create(index="test", body=mappings)
 for msg in dataToKibana:
     print(msg["text"])
     print("-------------")
@@ -101,6 +101,6 @@ for msg in dataToKibana:
                 }
             }
     actions.append(json.dumps(action))
-helpers.bulk(es, actions, index='loc11', doc_type='tweet')
+helpers.bulk(es, actions, index='test', doc_type='tweet')
     
 

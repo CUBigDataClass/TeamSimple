@@ -27,7 +27,7 @@ consumer.subscribe('tweepy-kafka-test1')
 
 
 for msg in consumer:
-    print(msg.value)
+    #print(msg.value)
     byteText = msg.value   
     text = str(byteText,"utf-8")
     #text = json
