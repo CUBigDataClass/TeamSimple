@@ -23,3 +23,6 @@ kill -9 pin
 
 brew services start mongodb-community@4.0
 mongo
+
+
+https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/26/python-virtual-env/
