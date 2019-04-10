@@ -20,6 +20,8 @@ Start Kafka:
 
 Start producer:
 
+Need to be in project folder. Couple librarys might need to be instll by using pip.
+
 `python Tweepy-kafkaProducer.py`
 
 Start Mongo database:
