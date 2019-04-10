@@ -8,6 +8,9 @@ import codecs
 from tweepy import StreamListener,Stream
 import json
 
+
+
+
 #twitter setup
 
 config = {}
@@ -108,7 +111,8 @@ producer = SimpleProducer(kafka)
 def get_twitter_data_token1():
     indiv = "and"
     count = 0
-    file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    file = "./tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    #file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
     #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
@@ -168,7 +172,8 @@ def get_twitter_data_token1():
 def get_twitter_data_token2():
     indiv = "and"
     count = 0
-    file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    file = "./tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    #file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
     #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
@@ -229,7 +234,8 @@ def get_twitter_data_token2():
 def get_twitter_data_token3():
     indiv = "and"
     count = 0
-    file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    file = "./tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    #file = "/Users/hanxu/Downloads/tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
     #file = "/Users/hanxu/Desktop/TeamSimple/tweetcount_" + str(indiv) + str(call_api_count) + ".txt"
     outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
