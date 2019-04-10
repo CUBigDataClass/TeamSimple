@@ -27,12 +27,9 @@ consumer.subscribe('tweepy-kafka-test1')
 
 print("For loop(listening)...")
 for msg in consumer:
-	#print(msg.value)
-	byteText = msg.value
-	text = str(byteText,"utf-8")
-	#text = json
-	data_to_insert = json.loads(text, strict=False)
-	
-	for tweet_dic in parse_emoji_and_divide_into_seperate_messages(data_to_insert):
-		print(tweet_dic)
-		x = mycollection.insert_one(tweet_dic)
+    #print(msg.value)
+    byteText = msg.value   
+    text = str(byteText,"utf-8")
+    #text = json
+    data_to_insert = json.loads(text, strict=False)
+    x = mycollection.insert_one(data_to_insert)
