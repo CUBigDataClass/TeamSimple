@@ -32,6 +32,11 @@ Start consumer
 
 `python kafkaConsumerMongo.py`
 
+Start python script that reads tweets from tweets collection --> get emoji --> store emoji counts in emoji collection
+
+`python parseTweetsAndStoreEmojiCounts.py`
+
+
 ### To stop:
 
 `Ctrl+c` for two python scripts
