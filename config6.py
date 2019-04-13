@@ -1,0 +1,4 @@
+access_key = '183318037-VQPpyjvLQYtouP0qUO4Pnp4jxLNxlpfqqdunCi3W'
+access_secret= '95492UTvLv5yIvqW1OTYaJxAcgS32em4MKJGwXLHJp44v'
+consumer_key = 'HDGJqm5cndQoEv9fiOqkt8mTC'
+consumer_secret = 'UaXTmfghenmIPD5GQqTRjLnPLK1i6xe6AjqXfkge9WDswYEvzj'
