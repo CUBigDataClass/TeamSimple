@@ -89,7 +89,7 @@ emoji_collection = mydb['emojis_test']
 # Start the infinite loop....
 while(True):
     # How many emoji we want to grab from source collection each round. only for testing
-    #numberOfTweetsToParse = 500
+    numberOfTweetsToParse = 500
     # Grab tweets from tweets_collection and store emoji counts into emoji_collection.
     update_sentimentAndEmoji_counts_using_tweets(tweets_collection, tweets_with_sentiment_collection, emoji_collection,numberOfTweetsToParse)
     time.sleep(1)
