@@ -53,9 +53,10 @@ def update_sentimentAndEmoji_counts_using_tweets(tweets_collection, tweets_with_
                 sentiment = max(scores, key=scores.get)
                 print(emojis_str, sentiment)
                 document['emojis'] = emojis_str
-                document['sentiment_score_text'] = sent_score
+                #document['sentiment_score_text'] = sent_score
                 document['sentiment_emoji'] = sentiment
                 document.pop('_id', None)
+                document.pop('text', None)
                 # Append emojis str and sentiment result to current entry and store it to a new dic
                 tweets_with_sentiment_collection.insert_one(document)    
 
