@@ -1,3 +1,6 @@
 .idea
 .DS_store
 tweetcount*.txt
+.vscode
+front-end/env
+__pycache__
