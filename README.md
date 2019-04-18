@@ -45,7 +45,7 @@ Then Stop Kafka first:
 
 `kafka-server-stop`
 
-Stop Zoomkeep:
+Stop Zookeeper:
 
 `zookeeper-server-stop`
 
