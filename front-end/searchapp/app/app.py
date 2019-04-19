@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
-
-from data import all_products
+from pymongo import MongoClient
 from app.search import search
 
 app = Flask(__name__)
@@ -12,6 +11,7 @@ def index():
     """
     Search for products across a variety of terms, and show 9 results for each.
     """
+    '''
     search_terms = [
         'necklace',
         'metal necklace',
@@ -23,11 +23,29 @@ def index():
         "men's jacket",
     ]
 
-    num_results = 9
-    products_by_category = [(t, search(t, num_results)) for t in search_terms]
+    products_by_category = [(t, search(t)) for t in search_terms]
+    '''
+
+    #tweets and emoji count
+    count = 0
+    client = MongoClient('localhost', 27017)
+    mydb = client['mydatabase']
+    # Source collection to read from.
+    tweets_collection = mydb['tweets_test']
+    # Collection to store sentiment and emoji count
+    tweets_with_sentiment_collection = mydb['tweets_with_sentiment_test']
+    emoji_collection = mydb['emojis_test']
+    
+    totalCount = tweets_collection.count()
+    emojiCount = emoji_collection.count()
+
+
+
+    #updated time
     return render_template(
         'index.html',
-        products_by_category=products_by_category,
+        totalCount = totalCount,
+        emojiCount = emojiCount
     )
 
 
@@ -36,28 +54,16 @@ def search_single_product():
     """
     Execute a search for a specific search term.
 
-    Return the top 50 results.
     """
     query = request.args.get('search')
-    num_results = 50
-    products_by_category = [(query, search(query, num_results))]
+    searched_results = [(query, search(query))]
+    
     return render_template(
-        'index.html',
-        products_by_category=products_by_category,
+        'search.html',
         search_term=query,
+        totalCount = len(search(query)),
+
+
     )
 
 
-@app.route('/product/<int:product_id>')
-def single_product(product_id):
-    """
-    Display information about a specific product
-    """
-
-    product = str(all_products()[product_id - 1])
-
-    return render_template(
-        'product.html',
-        product_json=product,
-        search_term='',
-    )

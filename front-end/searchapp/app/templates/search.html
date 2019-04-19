@@ -1,0 +1,468 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style>
+    #search-bar {
+      display: flex;
+      margin: 20px 20px;
+      border-radius: 25px;
+    }
+    #search-bar input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    #search-bar button {
+      margin-left: 15px;
+    }
+
+    .bulk-results {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .search {
+      margin: 0px 10px 20px 10px;
+      padding: 20px;
+      background: #fafaff;
+    }
+
+    .search-header {
+      height: 40px;
+    }
+
+    .search-term {
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .search-results {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-auto-rows: 150px;
+      grid-gap: 20px;
+    }
+
+    .product {
+      display: block;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .product-image {
+      max-width: 100px;
+      max-height: 100px;
+      margin-bottom: 10px;
+    }
+
+    .product-info {
+      height: 54px;
+      overflow: hidden;
+    }
+
+    .product-name {
+      font-size: 10px;
+      margin-right: 10px;
+    }
+
+  </style>
+  
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="static/img/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="refresh" content="600">
+
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="static/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="static/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="static/css/demo.css" rel="stylesheet" />
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="static/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="static/css/button.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="static/img/sidebar-5.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+      <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="dashboard.html" class="simple-text">
+                    Team Simple
+                </a>
+            </div>
+
+            <div class="nav">
+            <form id="search-bar" action="/search">
+                  <input type="text" placeholder="Search.." name="search" value="{{ search_term }}" style="color:black">
+            </form>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user.html">
+                        <i class="pe-7s-user"></i>
+                        <p>Team Member</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="user.html">
+                        <i class="pe-7s-user"></i>
+                        <p>Project Description</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="table.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Base Mode</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="typography.html">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Emoji Mode</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="icons.html">
+                        <i class="pe-7s-science"></i>
+                        <p>Sentimental Analysis</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="icons.html">
+                        <i class="pe-7s-science"></i>
+                        <p>Rank -- no title here, but rank</p>
+                    </a>
+                </li>
+            </ul>
+      </div>
+    </div>
+
+    <div class="main-panel">
+            <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-4">
+                        <div class="card">
+
+                            <div class="header">
+                                <h4 class="title"> <i class="fa fa-twitter" style = "color:blue"> </i> Tweets Total Count -- <b>{{totalCount}}</b></h4>
+                                <p class="category">Base Mode</p>
+                            </div>
+                            <div class="content">
+
+                                <div class="footer">
+                            
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            <div class="col-md-4">
+                        <div class="card">
+
+                            <div class="header">
+                                <h4 class="title"> <i class="fa fa-smile-o" style = "color:red"> </i> Emoji Total Count -- <b>{{emojiCount}}</b></h4>
+                                <p class="category">Emoji Mode</p>
+                            </div>
+                            <div class="content">
+
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+            </div>
+
+  <!--<div class="bulk-results">
+    {% for category, products in products_by_category %}
+      <div class="search">
+        <div class="search-header">
+          <a href="search?search={{category}}" class="search-term">"{{ category }}"</a>
+        </div>
+        <div class="search-results">
+          {% for product in products %}
+            <a href="/product/{{ product.id }}" class="product">
+              <img class="product-image" src="{{ product.image }}"/>
+              <div class="product-info">
+                <span>{{ product.name }}</span>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>-->
+           
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card">
+
+                            <div class="header">
+                                <h4 class="title">Tweets Count Statistics</h4>
+                                <p class="category">Base Mode</p>
+                            </div>
+                            <div class="content">
+                                <iframe id = "kibana1" src="http://localhost:5601/app/kibana#/visualize/edit/7b4c93a0-6207-11e9-bae0-df996fe32c89?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now%2Fd,mode:quick,to:now%2Fd))&_a=(filters:!(),linked:!f,query:(language:lucene,query:''),uiState:(),vis:(aggs:!(),params:(annotations:!((color:'rgba(253,161,255,1)',fields:text,icon:fa-bell,id:'9c015df0-6203-11e9-bebe-05d1825baf17',ignore_global_filters:1,ignore_panel_filters:1,index_pattern:'total6*',query_string:'text:%3D!'Psychology!'',template:'Ring+the+bell!!+$%7B%7Btext%7D%7D',time_field:timestamp)),axis_formatter:number,axis_position:left,axis_scale:normal,background_color_rules:!((id:'188237e0-6200-11e9-91a2-fbfd82b49cab')),bar_color_rules:!((id:'196ee1d0-6200-11e9-91a2-fbfd82b49cab')),drop_last_bucket:1,gauge_color_rules:!((id:'1ad305b0-6200-11e9-91a2-fbfd82b49cab')),gauge_inner_width:10,gauge_style:half,gauge_width:10,id:'61ca57f0-469d-11e7-af02-69e470af7417',index_pattern:total6,interval:'10m',legend_position:bottom,series:!((axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'4397da40-6203-11e9-bebe-05d1825baf17',label:USA,line_width:1,metrics:!((id:'4397da41-6203-11e9-bebe-05d1825baf17',type:count)),point_size:1,separate_axis:0,split_color_mode:gradient,split_mode:everything,stacked:none)),show_grid:1,show_legend:0,time_field:timestamp,type:timeseries),title:sample-USA,type:metrics))" height="400" width="800" style="border:none"></iframe>
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> USA
+                                        <i class="fa fa-circle text-danger"></i> Japan
+                                        <i class="fa fa-circle text-warning"></i> UK
+                                        <i class="fa fa-circle", style="color:purple"></i> Brazil
+                                        <i class="fa fa-circle", style="color:pink"></i> South Africa
+                                        <i class="fa fa-circle", style="color:green"></i> Austraila
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-md-5">
+                        <div class="card">
+
+                            <div class="header">
+                                <h4 class="title">Emoji Count Statistics</h4>
+                                <p class="category">Emoji Mode</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartActivity" class="ct-chart"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> USA
+                                        <i class="fa fa-circle text-danger"></i> Japan
+                                        <i class="fa fa-circle text-warning"></i> UK
+                                        <i class="fa fa-circle", style="color:purple"></i> Brazil
+                                        <i class="fa fa-circle", style="color:pink"></i> South Africa
+                                        <i class="fa fa-circle", style="color:green"></i> Austraila
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Tweets Count Map</h4>
+                                <p class="category">Base Mode</p>
+                            </div>
+                            <div class="content">
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> USA
+                                        <i class="fa fa-circle text-danger"></i> Japan
+                                        <i class="fa fa-circle text-warning"></i> UK
+                                        <i class="fa fa-circle", style="color:purple"></i> Brazil
+                                        <i class="fa fa-circle", style="color:pink"></i> South Africa
+                                        <i class="fa fa-circle", style="color:green"></i> Austraila
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Emoji Count Map</h4>
+                                <p class="category">Emoji Mode</p>
+                            </div>
+                            <div class="content">
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> USA
+                                        <i class="fa fa-circle text-danger"></i> Japan
+                                        <i class="fa fa-circle text-warning"></i> UK
+                                        <i class="fa fa-circle", style="color:purple"></i> Brazil
+                                        <i class="fa fa-circle", style="color:pink"></i> South Africa
+                                        <i class="fa fa-circle", style="color:green"></i> Austraila
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Overall Sentimental Analysis</h4>
+                                <p class="category">Base Mode</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> USA
+                                        <i class="fa fa-circle text-danger"></i> Japan
+                                        <i class="fa fa-circle text-warning"></i> UK
+                                        <i class="fa fa-circle", style="color:purple"></i> Brazil
+                                        <i class="fa fa-circle", style="color:pink"></i> South Africa
+                                        <i class="fa fa-circle", style="color:green"></i> Austraila
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Emoji Sentimental Analysis</h4>
+                                <p class="category">Emoji Mode</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> USA
+                                        <i class="fa fa-circle text-danger"></i> Japan
+                                        <i class="fa fa-circle text-warning"></i> UK
+                                        <i class="fa fa-circle", style="color:purple"></i> Brazil
+                                        <i class="fa fa-circle", style="color:pink"></i> South Africa
+                                        <i class="fa fa-circle", style="color:green"></i> Austraila
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="static/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+  <script src="static/js/bootstrap.min.js" type="text/javascript"></script>
+
+  <!--  Charts Plugin -->
+  <script src="static/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="static/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+  <script src="static/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+  <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+  <script src="static/js/demo.js"></script>
+  <script type="text/javascript">
+        
+        $(document).ready(function(){
+
+
+        });
+
+    </script>
+
+  <script type="text/javascript">
+    document.getElementById("kibana1").src = "http://localhost:5601/app/kibana#/visualize/edit/7b4c93a0-6207-11e9-bae0-df996fe32c89?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now%2Fd,mode:quick,to:now%2Fd))&_a=(filters:!(),linked:!f,query:(language:lucene,query:''),uiState:(),vis:(aggs:!(),params:(annotations:!((color:'rgba(253,161,255,1)',fields:text,icon:fa-bell,id:'9c015df0-6203-11e9-bebe-05d1825baf17',ignore_global_filters:1,ignore_panel_filters:1,index_pattern:'total6*',query_string:'text:%3D!'"+"{{search_term}}"+"!'',template:'Ring+the+bell!!+$%7B%7Btext%7D%7D',time_field:timestamp)),axis_formatter:number,axis_position:left,axis_scale:normal,background_color_rules:!((id:'188237e0-6200-11e9-91a2-fbfd82b49cab')),bar_color_rules:!((id:'196ee1d0-6200-11e9-91a2-fbfd82b49cab')),drop_last_bucket:1,gauge_color_rules:!((id:'1ad305b0-6200-11e9-91a2-fbfd82b49cab')),gauge_inner_width:10,gauge_style:half,gauge_width:10,id:'61ca57f0-469d-11e7-af02-69e470af7417',index_pattern:total6,interval:'10m',legend_position:bottom,series:!((axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'4397da40-6203-11e9-bebe-05d1825baf17',label:USA,line_width:1,metrics:!((id:'4397da41-6203-11e9-bebe-05d1825baf17',type:count)),point_size:1,separate_axis:0,split_color_mode:gradient,split_mode:everything,stacked:none)),show_grid:1,show_legend:0,time_field:timestamp,type:timeseries),title:sample-USA,type:metrics))"
+
+      
+  </script>
+
+
+
+</html>
+
+{% endblock %}

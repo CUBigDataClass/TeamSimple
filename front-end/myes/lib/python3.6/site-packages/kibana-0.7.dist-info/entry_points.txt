@@ -1,0 +1,3 @@
+[console_scripts]
+dotkibana = kibana.__main__:main
+

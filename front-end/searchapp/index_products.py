@@ -1,38 +1,28 @@
 from elasticsearch import Elasticsearch, helpers
 
-from constants import DOC_TYPE, INDEX_NAME
 from data import all_products, ProductData
+
+from pymongo import MongoClient
 
 
 def main():
     # Connect to localhost:9200 by default.
+    client = MongoClient(port=27017)
+    db = client["mydatabase"]
+    highest_previous_primary_key = 1
+    mycol = db['tweets_test']
+    
     es = Elasticsearch()
 
-    es.indices.delete(index=INDEX_NAME, ignore=404)
+    es.indices.delete(index="total6", ignore=404)
     es.indices.create(
-        index=INDEX_NAME,
+        index="total6",
         body={
             'mappings': {
-                DOC_TYPE: {
+                "tweet": {
                     'properties': {
-                        'name': {
-                            'type': 'text',
-                            'fields': {
-                                'english_analyzed': {
-                                    'type': 'text',
-                                    'analyzer': 'custom_english_analyzer',
-                                }
-                            }
-                        },
-                        'description': {
-                            'type': 'text',
-                            'fields': {
-                                'english_analyzed': {
-                                    'type': 'text',
-                                    'analyzer': 'custom_english_analyzer',
-                                }
-                            }
-                        }
+                        'text': {'type': 'text'},
+                        'timestamp': {'type': 'date'},
                     }
                 }
             },
@@ -49,45 +39,46 @@ def main():
         },
     )
 
+    count = 0
+    while True:
+        cursor = mycol.find({})
+        for msg in cursor:
+        #print(msg)
+            count+= 1
+            current_primary_key = int(str(msg['_id'])[-6:],16)
+            if current_primary_key > highest_previous_primary_key:
+                action = {
+                    "index": "total6",
+                    "type": "tweet",
+                    'text' : msg["text"],
+                    'timestamp': msg["created_at"],
+                }
+                es.create(index = "total6", doc_type = "tweet", id = count, body = action)
+                #print(msg["created_at"])
+                highest_previous_primary_key = current_primary_key
+
+'''
     products = all_products()
     bulk_index_products(es, products)
-    #index_product(es, all_products()[0])
 
-
-def index_product(es, product: ProductData):
-    """Add a single product to the ProductData index."""
-
-    es.create(
-        index=INDEX_NAME,
-        doc_type=DOC_TYPE,
-        id=product.id,
-        body={
-            "name": product.name,
-            "image": product.image,
-            "description": product.description,
-        }
-    )
-
-    # Don't delete this! You'll need it to see if your indexing job is working,
-    # or if it has stalled.
-    print("Indexed {}".format(product.name))
 
 def bulk_index_products(es, products):
     def format_bulk_action(product: ProductData):
         return {
             '_op_type': 'create',
-            '_index': INDEX_NAME,
-            '_type': DOC_TYPE,
+            '_index': total,
+            '_type': tweet,
             '_id': product.id,
             '_source': {
-                'name': product.name,
-                'image': product.image,
+                'text': product.name,
+                'timestamp': product.image,
                 'description': product.description,
             }
         }
     # this is not efficient, for workshop practice only
     actions = [format_bulk_action(product) for product in products]
     helpers.bulk(es, actions)
+'''
 
 if __name__ == '__main__':
     main()
