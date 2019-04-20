@@ -21,7 +21,7 @@ stop kibana
 lsof -i :5601
 kill -9 pin
 
-brew services start mongodb-community@4.0
+brew services restart mongodb-community@4.0
 mongo
 
 
