@@ -71,34 +71,6 @@ def main():
     #     },
     # )
 
-    es.indices.delete(index="emojitweets1", ignore=404)
-    es.indices.create(
-        index="emojitweets1",
-        body={
-            'mappings': {
-                "tweetEmoji": {
-                    'properties': {
-                        'timestamp': {'type': 'date'},
-                        'emoji' : {'type': 'text'},
-                        'country': {'type': 'text'},
-                        'emojiSent': {'type': 'text'}
-                    }
-                }
-            },
-            'settings': {
-                'analysis': {
-                    'analyzer': {
-                        'custom_english_analyzer': {
-                            'type': 'english',
-                            'stopwords': ['made', '_english_']
-                        }
-                    }
-                }
-            }
-        },
-    )
-
-
     count = 0
     count2 = 0
     while True:
