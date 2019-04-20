@@ -42,6 +42,12 @@ def update_sentimentAndEmoji_counts_using_tweets(tweets_collection, tweets_with_
                     sent_score = 0
                 else:
                     sent_score = sum(sentScore_list)/len(sentScore_list)
+                if sent_score > 0:
+                    sent_text = 'pos'
+                elif sent_score < 0:
+                    sent_text = 'neg'
+                else:
+                    sent_text = 'neu'
                 new_document.pop('_id', None)
                 new_document['sentimentScoreText'] = sent_score
                 tweets_with_sentiment_collection.insert_one(new_document)

@@ -27,7 +27,7 @@ def main():
                         'text': {'type': 'text'},
                         'timestamp': {'type': 'date'},
                         'country': {'type': 'text'},
-                        'textSentScore': {'type': 'float'}
+                        'textSentScore': {'type': 'text'}
                     }
                 },
             },
