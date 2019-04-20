@@ -10,31 +10,63 @@ tweepy -> kafka -> spark -> mongodb -> elasticsearch -> kibana
 
 ### To start
 
-Start zookeeper first:
+#### Back End
 
-`zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties`
+**on macOS**
 
-Start Kafka:
+1. Start zookeeper first:
 
-`kafka-server-start /usr/local/etc/kafka/server.properties`
+   `zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties`
 
-Start producer:
+2. Start Kafka:
 
-Need to be in project folder. Couple librarys might need to be instll by using pip.
+   `kafka-server-start /usr/local/etc/kafka/server.properties`
 
-`python Tweepy-kafkaProducer.py`
+3. Start producer:
 
-Start Mongo database:
+   Need to be in project folder. Couple librarys might need to be instll by using pip.
 
-`docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4`
+   `python Tweepy-kafkaProducer.py`
 
-Start consumer
+4. Start Mongo database:
 
-`python kafkaConsumerMongo.py`
+   `docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4`
 
-Start python script that reads tweets from tweets collection --> get emoji --> store emoji counts in emoji collection
+5. Start consumer
 
-`python parseTweetsAndStoreEmojiCounts.py`
+   `python kafkaConsumerMongo.py`
+
+6. Start python script that reads tweets from tweets collection --> get emoji --> store emoji counts in emoji collection
+
+   `python sentimentAnalysis-mongo.py`
+
+#### Front End
+
+**on macOS**
+
+1. start `elasticsearch` and `kibana`
+
+   Run:
+
+   `elasticsearch`
+
+   `kibana`
+
+2. activate virtual machine
+
+   in `front-end` folder run:
+
+   `source [VENVNAME]/bin/activate`
+
+3. run two Python script
+
+   `python searchapp/index_tweets.py`
+
+   `python searchapp/index_emojitweets.py`
+
+4. Run website
+
+   `python searchapp/run.py`
 
 
 ### To stop:
