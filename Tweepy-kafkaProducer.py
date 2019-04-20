@@ -33,9 +33,9 @@ def get_twitter_data_token(index, api, geo_info):
     indiv = "and"
     count = 0
     call_api_count = 0
-    file = "./tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
+    #file = "./tweetcount_"+ str(indiv) + str(call_api_count) + ".txt"
 
-    outfile = codecs.open(file, 'w', "utf-8")
+    #outfile = codecs.open(file, 'w', "utf-8")
     currentTime = str(datetime.datetime.utcnow().date())
     a = tweepy.Cursor(api.search, q = str(indiv), since = currentTime, geocode=geo_info[1]).items(3000)
 
@@ -55,10 +55,10 @@ def get_twitter_data_token(index, api, geo_info):
             record += "\"country\":" +  json.dumps(geo_info[0])
             record += '}'
             
-            outfile.write(str(now))
-            outfile.write(record)
-            outfile.write('------------------------------------------------------------------------')
-            outfile.write(str("\n"))
+            #outfile.write(str(now))
+            #outfile.write(record)
+            #outfile.write('------------------------------------------------------------------------')
+            #outfile.write(str("\n"))
             try:
                     #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
                 producer.send_messages('tweepy-kafka-test1', str.encode(record))
@@ -66,26 +66,25 @@ def get_twitter_data_token(index, api, geo_info):
             except Exception as e:
                 print(e)
                 break
-        else:
-            shouldContinue = False
-            record = '{'
-            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
-            record += ','
-            record += "\"text\":" +  json.dumps(str(t.text))
-            record += '}'
+        # else:
+        #     shouldContinue = False
+        #     record = '{'
+        #     record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+        #     record += ','
+        #     record += "\"text\":" +  json.dumps(str(t.text))
+        #     record += '}'
             
-            outfile.write(str(now))
-            outfile.write(record)
-            outfile.write('------------------------------------------------------------------------')
-            outfile.write(str("\n"))
-            try:
-                    #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
-                producer.send_messages('tweepy-kafka-test1', str.encode(record))
-            #print(record)
-            except Exception as e:
-                print(e)
-                break
-        #print('\n')
+        #     outfile.write(str(now))
+        #     outfile.write(record)
+        #     outfile.write('------------------------------------------------------------------------')
+        #     outfile.write(str("\n"))
+        #     try:
+        #         #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+        #         producer.send_messages('tweepy-kafka-test1', str.encode(record))
+
+        #     except Exception as e:
+        #         print(e)
+        #         break
 
         if not shouldContinue: # check if tweet is still within time range. Tweet returned are ordered according to recent already.
             #print('exiting the loop')
@@ -104,7 +103,7 @@ geo_codes = [['USA','40,-100,1600km'],['Japan','38,140,800km'],['England','54.69
 
 # 一分钟只能一个request
 # 所以60秒钟除以config file的数量
-interval = 60/len(configs)
+interval = 60
 
 # 为了实现不停地循环loop列表里的信息，建立两个一直递增的index然后取余数(使用列表长度)，从而实现列表index不停循环
 # api token config file 列表

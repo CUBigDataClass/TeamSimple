@@ -1,6 +1,6 @@
 # coding: utf-8
-from pyspark.sql.functions import udf, col,split
-from pyspark.ml.clustering import KMeans
+#from pyspark.sql.functions import udf, col,split
+#from pyspark.ml.clustering import KMeans
 import json
 import elasticsearch
 from elasticsearch import Elasticsearch
@@ -15,7 +15,7 @@ from emoji_filter import *
 import sys
 import shutil
 import nltk
-from pyspark import SparkConf, SparkContext
+#from pyspark import SparkConf, SparkContext
 
 def update_sentimentAndEmoji_counts_using_tweets(tweets_collection, tweets_with_sentiment_collection, emoji_collection, numberOfTweetsToParse):
     # How many emoji we want to grab from source collection.
@@ -29,19 +29,23 @@ def update_sentimentAndEmoji_counts_using_tweets(tweets_collection, tweets_with_
             current_primary_key = int('0x'+str(document['_id'])[-6:],16)
             if current_primary_key > highest_previous_primary_key:
                 #get text sentiment score
+                new_document = document
                 tweet = document["text"]
                 text = re.sub(r"http\S+", "", tweet)
                 if text == '':
-                    tweets_collection.update({"_id": document["_id"]}, {"$set": {"sentimentScoreText": 0}})
                     continue            
                 blob = TextBlob(text)
                 sentScore_list = []
                 for sentence in blob.sentences:
                     sentScore_list.append(sentence.sentiment.polarity)
-                sent_score = sum(sentScore_list)/len(sentScore_list)
-                tweets_collection.update({"_id": document["_id"]}, {"$set": {"sentimentScoreText": sent_score}})
-            
-
+                if len(sentScore_list) == 0:
+                    sent_score = 0
+                else:
+                    sent_score = sum(sentScore_list)/len(sentScore_list)
+                new_document.pop('_id', None)
+                new_document['sentimentScoreText'] = sent_score
+                tweets_with_sentiment_collection.insert_one(new_document)
+    
             
                 # Get emojis from current tweet.
                 emojis = extract_emojis(document['text'])
@@ -53,14 +57,14 @@ def update_sentimentAndEmoji_counts_using_tweets(tweets_collection, tweets_with_
                 scores = sentAnalyzer.polarity_scores(emojis_str)
                 del scores['compound']
                 sentiment = max(scores, key=scores.get)
-                print(emojis_str, sentiment)
+                #print(emojis_str, sentiment)
                 document['emoji'] = emojis_str
                 #document['sentimentScoreText'] = sent_score
                 document['sentimentEmoji'] = sentiment
                 document.pop('_id', None)
                 document.pop('text', None)
                 # Append emojis str and sentiment result to current entry and store it to a new dic
-                tweets_with_sentiment_collection.insert_one(document)    
+                emoji_collection.insert_one(document)    
 
                 ''' ----------  Count emojis summary and store them into a new collection ----------'''
                 # for emoji in emojis:
@@ -88,9 +92,10 @@ client = MongoClient('localhost', 27017)
 mydb = client['mydatabase']
 # Source collection to read from.
 tweets_collection = mydb['tweets_test']
+
+tweets_with_sentiment_collection = mydb['tweets_text_sentiment']
 # Collection to store sentiment and emoji count
-tweets_with_sentiment_collection = mydb['tweets_emoji_entiment']
-emoji_collection = mydb['emojis_test'] 
+emoji_collection = mydb['tweets_emoji_sentiment']
 # How many emoji we want to grab from source collection each round. only for testing
 numberOfTweetsToParse = 500
 # Grab tweets from tweets_collection and store emoji counts into emoji_collection.
