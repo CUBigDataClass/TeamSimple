@@ -68,6 +68,9 @@
       $('#focus-usa').click(function(){
         $('#map1').vectorMap('set', 'focus', {region: 'CA', animate: true});
                       });
+      $('#focus-init').click(function(){
+        $('#map1').vectorMap('set', 'focus', {scale: 1, x: 0.5, y: 0.5, animate: true});
+                      });
   /*    $('#focus-multiple').click(function(){
         $('#map1').vectorMap('set', 'focus', {scale: 7 ,lat: 95, lng:37, animate: true});
       });
@@ -291,6 +294,8 @@
   <button id="focus-africa">Go to Africa</button>
   <button id="focus-australia">Go to Australia</button>
   <button id="focus-usa">Go to Canada</button>
+  <button id="focus-init">Return to the World view</button>
+
 
 
 
