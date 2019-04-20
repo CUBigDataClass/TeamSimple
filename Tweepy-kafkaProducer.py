@@ -66,25 +66,27 @@ def get_twitter_data_token(index, api, geo_info):
             except Exception as e:
                 print(e)
                 break
-        # else:
-        #     shouldContinue = False
-        #     record = '{'
-        #     record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
-        #     record += ','
-        #     record += "\"text\":" +  json.dumps(str(t.text))
-        #     record += '}'
+        else:
+            shouldContinue = False
+            record = '{'
+            record += "\"created_at\":" +  json.dumps(str(t.created_at)[:10]+'T'+str(t.created_at)[11:]+'Z')
+            record += ','
+            record += "\"text\":" +  json.dumps(str(t.text))
+            record += ','
+            record += "\"country\":" +  json.dumps(geo_info[0])
+            record += '}'
             
-        #     outfile.write(str(now))
-        #     outfile.write(record)
-        #     outfile.write('------------------------------------------------------------------------')
-        #     outfile.write(str("\n"))
-        #     try:
-        #         #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
-        #         producer.send_messages('tweepy-kafka-test1', str.encode(record))
+            # outfile.write(str(now))
+            # outfile.write(record)
+            # outfile.write('------------------------------------------------------------------------')
+            # outfile.write(str("\n"))
+            try:
+                #producer.send_messages('kafkatwitterstream_' + str(indiv),t.text.encode("utf-8"))
+                producer.send_messages('tweepy-kafka-test1', str.encode(record))
 
-        #     except Exception as e:
-        #         print(e)
-        #         break
+            except Exception as e:
+                print(e)
+                break
 
         if not shouldContinue: # check if tweet is still within time range. Tweet returned are ordered according to recent already.
             #print('exiting the loop')
