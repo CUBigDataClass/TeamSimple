@@ -1,6 +1,6 @@
 # TeamSimple
 
-Our team aims to create a real-time twitter map with emojis. Big data techniques will be used. 
+Our team aims to create a real-time twitter map with emojis. Big data techniques will be used.
 
 Current architecture:
 
@@ -24,7 +24,7 @@ tweepy -> kafka -> spark -> mongodb -> elasticsearch -> kibana
 
 3. Start producer:
 
-   Need to be in project folder. Couple librarys might need to be instll by using pip.
+   Need to be in project folder. Couple libraries might need to be install by using pip.
 
    `python Tweepy-kafkaProducer.py`
 
@@ -86,12 +86,3 @@ Stop and remove docker container for Mongo database:
 `docker container stop CONTAINER_NAME`
 
 `docker container rm CONTAINER_NAME`
-
-
-
-
-
-
-
-
-
