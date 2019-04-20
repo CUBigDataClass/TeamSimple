@@ -99,7 +99,7 @@ kafka = KafkaClient("localhost:9092")
 producer = SimpleProducer(kafka)
 
 configs = ['config0.py','config1.py','config2.py','config3.py','config4.py','config5.py','config6.py']
-geo_codes = [['USA','40,-100,1600km'],['Japan','38,140,800km'],['England','54.6974,-3.8112,350km'],['Brazil','-9.8864,-50.4513,1600km'],['South Africa','-30.2184,24.3814,610km']]
+geo_codes = [['USA','40,-100,1600km'],['Japan','38,140,800km'],['England','54.6974,-3.8112,350km'],['Brazil','-9.8864,-50.4513,1600km'],['South Africa','-30.2184,24.3814,610km'],['Australia','-34.9,145.1,1000km']]
 
 # 一分钟只能一个request
 # 所以60秒钟除以config file的数量
