@@ -4,3 +4,5 @@ tweetcount*.txt
 .vscode
 front-end/env
 __pycache__
+front-end/myes
+__pycache__
