@@ -22,7 +22,7 @@ consumer = KafkaConsumer(bootstrap_servers='localhost:9092',
 
 
 print("Subscribing...")
-consumer.subscribe('tweepy-kafka-test2')
+consumer.subscribe('tweepy-kafka-test1')
 
 
 print("For loop(listening)...")
