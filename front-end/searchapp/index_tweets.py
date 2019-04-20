@@ -11,8 +11,13 @@ def main():
     db = client["mydatabase"]
     highest_previous_primary_key = 1
     highest_previous_primary_key2 = 1
+<<<<<<< HEAD
     mycol = db['tweets_text_sentiment']
     emoji_sentiment = db['tweets_emoji_sentiment']
+=======
+    mycol = db['tweets_test']
+    emoji_sentiment = db['tweets_emoji_entiment']
+>>>>>>> fa13356e8730ec40507dd5aa96070072fc6e390c
     es = Elasticsearch()
 
     es.indices.delete(index="totaltweets1", ignore=404)
@@ -41,6 +46,7 @@ def main():
             }
         },
     )
+<<<<<<< HEAD
     # es.indices.delete(index="emojitweets1", ignore=404)
     # es.indices.create(
     #     index="emojitweets1",
@@ -67,6 +73,34 @@ def main():
     #         }
     #     },
     # )
+=======
+    es.indices.delete(index="emojitweets1", ignore=404)
+    es.indices.create(
+        index="emojitweets1",
+        body={
+            'mappings': {
+                "tweetEmoji": {
+                    'properties': {
+                        'timestamp': {'type': 'date'},
+                        'emoji' : {'type': 'text'},
+                        'country': {'type': 'text'},
+                        'emojiSent': {'type': 'text'}
+                    }
+                }
+            },
+            'settings': {
+                'analysis': {
+                    'analyzer': {
+                        'custom_english_analyzer': {
+                            'type': 'english',
+                            'stopwords': ['made', '_english_']
+                        }
+                    }
+                }
+            }
+        },
+    )
+>>>>>>> fa13356e8730ec40507dd5aa96070072fc6e390c
 
     count = 0
     count2 = 0
@@ -90,6 +124,7 @@ def main():
                 highest_previous_primary_key = current_primary_key
 
         #emoji collection
+<<<<<<< HEAD
         # cursor2 = emoji_sentiment.find({})
         # for msg in cursor2:
         #     count2 += 1
@@ -106,6 +141,24 @@ def main():
         #         es.create(index = "emojitweets1", doc_type = "tweetEmoji", id = count2, body = action2)
         #         #print(msg["created_at"])
         #         highest_previous_primary_key2 = current_primary_key2
+=======
+        cursor2 = emoji_sentiment.find({})
+        for msg in cursor2:
+            count2 += 1
+            current_primary_key2 = int(str(msg['_id'])[-6:],16)
+            if current_primary_key2 > highest_previous_primary_key2:
+                action2 = {
+                    "index": "emojitweets1",
+                    "type": "tweetEmoji",
+                    'timestamp': msg["created_at"],
+                    'emoji': msg['emoji'],
+                    'country': msg["country"],
+                    'emojiSent': msg['sentimentEmoji']
+                }
+                es.create(index = "emojitweets1", doc_type = "tweetEmoji", id = count2, body = action2)
+                #print(msg["created_at"])
+                highest_previous_primary_key2 = current_primary_key2
+>>>>>>> fa13356e8730ec40507dd5aa96070072fc6e390c
 
 
 '''
