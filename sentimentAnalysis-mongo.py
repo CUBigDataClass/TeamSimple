@@ -49,7 +49,7 @@ def update_sentimentAndEmoji_counts_using_tweets(tweets_collection, tweets_with_
                 else:
                     sent_text = 'neu'
                 new_document.pop('_id', None)
-                new_document['sentimentScoreText'] = sent_score
+                new_document['sentimentScoreText'] = sent_text
                 tweets_with_sentiment_collection.insert_one(new_document)
     
             
