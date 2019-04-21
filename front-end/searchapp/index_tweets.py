@@ -11,15 +11,15 @@ def main():
     db = client["mydatabase"]
     highest_previous_primary_key = 1
     highest_previous_primary_key2 = 1
-
+    mycol1 = db['tweets_test']
     mycol = db['tweets_text_sentiment']
     emoji_sentiment = db['tweets_emoji_sentiment']
 
     es = Elasticsearch()
 
-    es.indices.delete(index="totaltweets6", ignore=404)
+    es.indices.delete(index="totaltweets10", ignore=404)
     es.indices.create(
-        index="totaltweets6",
+        index="totaltweets10",
         body={
             'mappings': {
                 "tweet": {
@@ -27,7 +27,7 @@ def main():
                         'text': {'type': 'text'},
                         'timestamp': {'type': 'date'},
                         'country': {'type': 'text'},
-                        'textSentScore': {'type': 'text'},
+                        #'textSentScore': {'type': 'text'},
                         'location':{'type': "geo_point" }
                     }
                 },
@@ -77,22 +77,22 @@ def main():
     count = 0
     count2 = 0
     while True:
-        cursor = mycol.find({})
+        cursor = mycol1.find({})
         for msg in cursor:
         #print(msg)
             count += 1
             current_primary_key = int(str(msg['_id'])[-6:],16)
             if current_primary_key > highest_previous_primary_key:
                 action = {
-                    "index": "totaltweets6",
+                    "index": "totaltweets10",
                     "type": "tweet",
                     'text' : msg["text"],
                     'timestamp': msg["created_at"],
                     'country': msg["country"],
-                    'textSentScore': msg['sentimentScoreText'],
+                    #'textSentScore': msg['sentimentScoreText'],
                     'location': msg['location']
                 }
-                es.create(index = "totaltweets6", doc_type = "tweet", id = count, body = action)
+                es.create(index = "totaltweets10", doc_type = "tweet", id = count, body = action)
                 #print(msg["created_at"])
                 highest_previous_primary_key = current_primary_key
 
