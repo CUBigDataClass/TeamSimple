@@ -15,17 +15,31 @@ def main():
     emoji_sentiment = db['tweets_emoji_sentiment']
     es = Elasticsearch()
 
-    es.indices.delete(index="emojitweets4", ignore=404)
+    es.indices.delete(index="emojitweets5", ignore=404)
     es.indices.create(
-        index="emojitweets4",
+        index="emojitweets5",
         body={
             'mappings': {
                 "tweetEmoji": {
                     'properties': {
                         'timestamp': {'type': 'date'},
-                        'emoji' : {'type': 'text'},
+                        'emoji' : { 
+                            'type': 'text',
+                            'fields': {
+                                'raw':{
+                                    'type': 'keyword'
+                                }
+                            }
+                        },
                         'country': {'type': 'text'},
-                        'emojiSent': {'type': 'text'}
+                        'emojiSent': {
+                            'type': 'text',
+                            'fields': {
+                                'raw':{
+                                    'type': 'keyword'
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -52,14 +66,14 @@ def main():
             current_primary_key2 = int(str(msg['_id'])[-6:],16)
             if current_primary_key2 > highest_previous_primary_key2:
                 action2 = {
-                    "index": "emojitweets4",
+                    "index": "emojitweets5",
                     "type": "tweetEmoji",
                     'timestamp': msg["created_at"],
                     'emoji': msg['emoji'],
                     'country': msg["country"],
                     'emojiSent': msg['sentimentEmoji']
                 }
-                es.create(index = "emojitweets4", doc_type = "tweetEmoji", id = count2, body = action2)
+                es.create(index = "emojitweets5", doc_type = "tweetEmoji", id = count2, body = action2)
                 #print(msg["created_at"])
                 highest_previous_primary_key2 = current_primary_key2
 

@@ -31,12 +31,11 @@ def index():
     client = MongoClient('localhost', 27017)
     mydb = client['mydatabase']
     # Source collection to read from.
-    tweets_collection = mydb['tweets_test']
     # Collection to store sentiment and emoji count
-    tweets_with_sentiment_collection = mydb['tweets_with_sentiment_test']
-    emoji_collection = mydb['emojis_test']
+    tweets_with_sentiment_collection = mydb['tweets_text_sentiment']
+    emoji_collection = mydb['tweets_emoji_sentiment']
     
-    totalCount = tweets_collection.count()
+    totalCount = tweets_with_sentiment_collection.count()
     emojiCount = emoji_collection.count()
 
 
@@ -61,9 +60,34 @@ def search_single_product():
     return render_template(
         'search.html',
         search_term=query,
-        totalCount = len(search(query)),
+        totalCount = len(search(query)[0]),
+        emojiCount = len(search(query)[1])
 
 
     )
+
+@app.route('/group-member.html')
+def group_member():
+    """
+    Execute a search for a specific search term.
+
+    """
+    
+    return render_template(
+        'group-member.html'      
+
+    )
+
+@app.route('/ProjectDescription.html')
+def description():
+    """
+    Execute a search for a specific search term.
+
+    """
+    
+    return render_template(
+        'ProjectDescription.html' 
+        )     
+
 
 
