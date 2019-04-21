@@ -22,7 +22,7 @@ body
   position: relative;
   width: 350px;
   margin: 0 auto;
-  background: #943ad1;
+  background: #a64fda;
   padding: 20px;
   box-sizing: border-box;;
   text-align: center;
@@ -64,13 +64,13 @@ body
 
 .test .card .content .image
 {
-  width: 100px;
-  height: 100px;
+  width: 220px;
+  height: 200px;
   margin: 0 auto;
-  border-radius: 50%;
+  border-radius: 100%;
   overflow: hidden;
   border: 4px solid #fff;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 .test .card .content .details h2
