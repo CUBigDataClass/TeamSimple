@@ -54,7 +54,7 @@ def get_twitter_data_token(index, api, geo_info):
             record += ','
             record += "\"country\":" +  json.dumps(geo_info[0])
             record += ','
-            record += "\"ISO_code\":" + json.dumps(geo_info[2])
+            record += "\"location\":" + json.dumps(geo_info[2])
             record += '}'
             
             #outfile.write(str(now))
@@ -77,7 +77,7 @@ def get_twitter_data_token(index, api, geo_info):
             record += ','
             record += "\"country\":" +  json.dumps(geo_info[0])
             record += ','
-            record += "\"ISO_code\":" + json.dumps(geo_info[2])
+            record += "\"location\":" + json.dumps(geo_info[2])
             record += '}'
             
             # outfile.write(str(now))
@@ -105,7 +105,7 @@ kafka = KafkaClient("localhost:9092")
 producer = SimpleProducer(kafka)
 
 configs = ['config0.py','config1.py','config2.py','config3.py','config4.py','config5.py','config6.py']
-geo_codes = [['USA','40,-100,1600km','US'],['Japan','38,140,800km','JP'],['England','54.6974,-3.8112,350km','GB'],['Brazil','-9.8864,-50.4513,1600km','BR'],['South Africa','-30.2184,24.3814,610km','ZA'],['Australia','-34.9,145.1,1000km','AU']]
+geo_codes = [['USA','40,-100,1600km',"40,-100"],['Japan','38,140,800km',"38,140"],['England','54.6974,-3.8112,350km',"54.69,-3.81"],['Brazil','-9.8864,-50.4513,1600km',"-9.88,-50.45"],['South Africa','-30.2184,24.3814,610km',"-30.22,24.38"],['Australia','-34.9,145.1,1000km',"-34.9,145.1"]]
 
 # Only one request is allowed per minute.
 interval = 60
