@@ -101,6 +101,8 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="static/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="static/css/button.css" rel="stylesheet" />
+    <link href="static/css/group-member-style.css" rel="stylesheet" />
+    <link href="static/css/description.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -178,17 +180,32 @@
                         <div class="card">
 
                             <div class="header">
-                            {% if totalCount >= 10000 %}
-                                <h4 class="title"> <i class="fa fa-twitter" style = "color:blue"> </i> Tweets (containing "{{search_term}}") Total Count -- <b> larger than {{totalCount}} </b></h4>
-                            {% else %}
-                                <h4 class="title"> <i class="fa fa-twitter" style = "color:blue"> </i> Tweets (containing "{{search_term}}") Total Count -- <b> {{totalCount}} </b></h4>
-                            {% endif %}
+                                <h4 class="title"> <i class="fa fa-twitter" style = "color:blue"> </i> Tweets Total Count -- <b>{{totalCount}}</b></h4>
                                 <p class="category">Base Mode</p>
                             </div>
                             <div class="content">
 
                                 <div class="footer">
                             
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            <div class="col-md-5">
+                        <div class="card">
+
+                            <div class="header">
+                                <h4 class="title"> <i class="fa fa-smile-o" style = "color:red"> </i> Emoji Total Count -- <b>{{emojiCount}}</b></h4>
+                                <p class="category">Emoji Mode</p>
+                            </div>
+                            <div class="content">
+
+                                <div class="footer">
                                     <hr>
                                     <div class="stats">
                                         <i class="fa fa-clock-o"></i> Updated every 1 min 
@@ -224,17 +241,17 @@
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
+
+                    <div class="row">
                     <div class="col-md-11">
                         <div class="card">
 
                             <div class="header">
-                                <h4 class="title">Tweets Count Statistics</h4>
-                                <p class="category">Base Mode</p>
+                                <h4 class="title">Emoji Count Statistics</h4>
+                                <p class="category">Emoji Mode</p>
                             </div>
                             <div class="content">
-                                <iframe id="kibana1" src="http://localhost:5601/app/kibana#/visualize/edit/fd0cfa20-63b4-11e9-ac04-bf70bb64c6be?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now-4h,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(language:lucene,query:''),uiState:(),vis:(aggs:!(),params:(annotations:!((color:'rgba(12,121,125,1)',fields:text,icon:fa-bell,id:'41268c30-63b0-11e9-96fe-51cda6d36192',ignore_global_filters:1,ignore_panel_filters:1,index_pattern:totaltweets4,query_string:trump,template:'Ring+the+bell!!+$%7B%7Btext%7D%7D',time_field:timestamp)),axis_formatter:number,axis_position:left,axis_scale:normal,background_color_rules:!((id:cc5cc810-63af-11e9-96fe-51cda6d36192)),id:'61ca57f0-469d-11e7-af02-69e470af7417',index_pattern:totaltweets4,interval:'30s',legend_position:bottom,series:!((axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,filter:'',formatter:number,id:'61ca57f1-469d-11e7-af02-69e470af7417',label:'',line_width:1,metrics:!((id:'61ca57f2-469d-11e7-af02-69e470af7417',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(244,78,59,1)',filter:Japan,id:'765b3920-63ae-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none,terms_direction:asc,terms_field:timestamp,terms_order_by:_term),(axis_position:right,chart_type:line,color:'rgba(244,78,59,1)',fill:0.5,formatter:number,id:f33818f0-63ae-11e9-96fe-51cda6d36192,label:'',line_width:1,metrics:!((id:f33818f1-63ae-11e9-96fe-51cda6d36192,type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(253,161,255,1)',filter:'South+Africa',id:f82144e0-63ae-11e9-96fe-51cda6d36192,label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'18dc7b00-63af-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'18dc7b01-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(101,50,148,1)',filter:Brazil,id:'1d24fa20-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'4e8079a0-63af-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'4e8079a1-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(115,216,255,1)',filter:USA,id:'519b4e30-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'5f79b870-63af-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'5f79df80-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(104,188,0,1)',filter:Australia,id:'62759350-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:'rgba(254,146,0,1)',fill:0.5,formatter:number,id:'8304fe80-63af-11e9-96fe-51cda6d36192',label:UK,line_width:1,metrics:!((id:'8304fe81-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(254,146,0,1)',filter:England,id:'8938d2e0-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none)),show_grid:1,show_legend:1,time_field:timestamp,type:timeseries),title:'totalcount4+statistics',type:metrics))" height="400" width="800" style="border:none"></iframe>
-
+                                <iframe src="http://localhost:5601/app/kibana#/visualize/edit/a11d0010-63ba-11e9-ac04-bf70bb64c6be?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now-4h,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(language:lucene,query:''),uiState:(),vis:(aggs:!(),params:(axis_formatter:number,axis_position:left,axis_scale:normal,id:'61ca57f0-469d-11e7-af02-69e470af7417',index_pattern:emojitweets4,interval:'30s',series:!((axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'61ca57f1-469d-11e7-af02-69e470af7417',label:'',line_width:1,metrics:!((id:'61ca57f2-469d-11e7-af02-69e470af7417',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(115,216,255,1)',filter:USA,id:'2ef0f140-63ba-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'38fef290-63ba-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'38fef291-63ba-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(244,78,59,1)',filter:Japan,id:'3aa94730-63ba-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'4b15af50-63ba-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'4b15af51-63ba-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(254,146,0,1)',filter:England,id:'4d0b16b0-63ba-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'52ba9fe0-63ba-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'52ba9fe1-63ba-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(101,50,148,1)',filter:Brazil,id:'550998f0-63ba-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'5c56a580-63ba-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'5c56a581-63ba-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(253,161,255,1)',filter:'South+Africa',id:'5f667d90-63ba-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'660018a0-63ba-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'660018a1-63ba-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:%2368BC00,filter:Australia,id:'68223550-63ba-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none)),show_grid:1,show_legend:1,time_field:timestamp,type:timeseries),title:emojicount4,type:metrics))" height="400" width="800" style="border:none"></iframe>
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
@@ -244,20 +261,20 @@
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
 
 
                 <div class="row">
                     <div class="col-md-11">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">Tweets Count Map</h4>
-                                <p class="category">Base Mode</p>
+                                <h4 class="title">Emoji Count Map</h4>
+                                <p class="category">Emoji Mode</p>
                             </div>
                             <div class="content">
-                                
+
                                 <div class="footer">
-                                <div class="legend">
+                                    <div class="legend">
                                         <i class="fa fa-circle text-info"></i> USA
                                         <i class="fa fa-circle text-danger"></i> Japan
                                         <i class="fa fa-circle text-warning"></i> UK
@@ -275,19 +292,18 @@
                     </div>
                 </div>
 
-
                 <div class="row">
+
                     <div class="col-md-6">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">Overall Sentimental Analysis</h4>
-                                <p class="category">Base Mode</p>
+                                <h4 class="title">Emoji Cloud</h4>
+                                <p class="category">Emoji Mode</p>
                             </div>
                             <div class="content">
-                                <iframe id="kibana2" src="http://localhost:5601/app/kibana#/visualize/edit/2be7eb70-63c4-11e9-ac04-bf70bb64c6be?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now%2Fy,mode:quick,to:now%2Fy))&_a=(filters:!(),linked:!f,query:(language:lucene,query:hello),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(),schema:metric,type:count),(enabled:!t,id:'2',params:(field:textSentScore,missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:5),schema:segment,type:terms)),params:(addLegend:!t,addTooltip:!t,isDonut:!t,labels:(last_level:!t,show:!t,truncate:100,values:!t),legendPosition:bottom,type:pie),title:'tweetscount+pie',type:pie))" height="400" width="400" style="border:none"></iframe>
+                                <iframe src="http://localhost:5601/app/kibana#/visualize/edit/412f9240-63c3-11e9-ac04-bf70bb64c6be?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now%2Fy,mode:quick,to:now%2Fy))&_a=(filters:!(),linked:!f,query:(language:lucene,query:''),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(),schema:metric,type:count),(enabled:!t,id:'2',params:(field:emoji.raw,missingBucket:!f,missingBucketLabel:Missing,order:asc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:30),schema:segment,type:terms)),params:(maxFontSize:61,minFontSize:18,orientation:multiple,scale:log,showLabel:!f),title:'emoji+cloud',type:tagcloud))" height="400" width="400" style = "border:none"></iframe>
 
                                 <div class="footer">
-                                    
                                     <hr>
                                     <div class="stats">
                                         <i class="fa fa-clock-o"></i> Updated every 1 min 
@@ -296,7 +312,28 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Emoji Sentimental Analysis</h4>
+                                <p class="category">Emoji Mode</p>
+                            </div>
+                            <div class="content">
+                                <iframe src="http://localhost:5601/app/kibana#/visualize/edit/0f569ad0-63c2-11e9-ac04-bf70bb64c6be?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now%2Fy,mode:quick,to:now%2Fy))&_a=(filters:!(),linked:!f,query:(language:lucene,query:''),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(),schema:metric,type:count),(enabled:!t,id:'2',params:(field:emojiSent.raw,missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:5),schema:segment,type:terms)),params:(addLegend:!t,addTooltip:!t,isDonut:!t,labels:(last_level:!f,show:!t,truncate:100,values:!t),legendPosition:bottom,type:pie),title:'emoji-pie+chart',type:pie))" height="400" width="400" style="border:none"></iframe>
+
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Updated every 1 min 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 
@@ -331,18 +368,11 @@
         
         $(document).ready(function(){
 
+            demo.initChartist();
 
         });
 
     </script>
-
-  <script type="text/javascript">
-    document.getElementById("kibana1").src = "http://localhost:5601/app/kibana#/visualize/edit/fd0cfa20-63b4-11e9-ac04-bf70bb64c6be?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now-4h,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(language:lucene,query:''),uiState:(),vis:(aggs:!(),params:(annotations:!((color:'rgba(12,121,125,1)',fields:text,icon:fa-bell,id:'41268c30-63b0-11e9-96fe-51cda6d36192',ignore_global_filters:1,ignore_panel_filters:1,index_pattern:totaltweets4,query_string:"+"{{search_term}}"+",template:'Ring+the+bell!!+$%7B%7Btext%7D%7D',time_field:timestamp)),axis_formatter:number,axis_position:left,axis_scale:normal,background_color_rules:!((id:cc5cc810-63af-11e9-96fe-51cda6d36192)),id:'61ca57f0-469d-11e7-af02-69e470af7417',index_pattern:totaltweets4,interval:'30s',legend_position:bottom,series:!((axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,filter:'',formatter:number,id:'61ca57f1-469d-11e7-af02-69e470af7417',label:'',line_width:1,metrics:!((id:'61ca57f2-469d-11e7-af02-69e470af7417',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(244,78,59,1)',filter:Japan,id:'765b3920-63ae-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none,terms_direction:asc,terms_field:timestamp,terms_order_by:_term),(axis_position:right,chart_type:line,color:'rgba(244,78,59,1)',fill:0.5,formatter:number,id:f33818f0-63ae-11e9-96fe-51cda6d36192,label:'',line_width:1,metrics:!((id:f33818f1-63ae-11e9-96fe-51cda6d36192,type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(253,161,255,1)',filter:'South+Africa',id:f82144e0-63ae-11e9-96fe-51cda6d36192,label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'18dc7b00-63af-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'18dc7b01-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(101,50,148,1)',filter:Brazil,id:'1d24fa20-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'4e8079a0-63af-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'4e8079a1-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(115,216,255,1)',filter:USA,id:'519b4e30-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:%2368BC00,fill:0.5,formatter:number,id:'5f79b870-63af-11e9-96fe-51cda6d36192',label:'',line_width:1,metrics:!((id:'5f79df80-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(104,188,0,1)',filter:Australia,id:'62759350-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none),(axis_position:right,chart_type:line,color:'rgba(254,146,0,1)',fill:0.5,formatter:number,id:'8304fe80-63af-11e9-96fe-51cda6d36192',label:UK,line_width:1,metrics:!((id:'8304fe81-63af-11e9-96fe-51cda6d36192',type:count)),point_size:1,separate_axis:0,split_filters:!((color:'rgba(254,146,0,1)',filter:England,id:'8938d2e0-63af-11e9-96fe-51cda6d36192',label:'')),split_mode:filters,stacked:none)),show_grid:1,show_legend:1,time_field:timestamp,type:timeseries),title:'totalcount4+statistics',type:metrics))" 
-
-    document.getElementById("kibana2").src = "http://localhost:5601/app/kibana#/visualize/edit/2be7eb70-63c4-11e9-ac04-bf70bb64c6be?embed=true&_g=(refreshInterval:(pause:!f,value:60000),time:(from:now%2Fy,mode:quick,to:now%2Fy))&_a=(filters:!(),linked:!f,query:(language:lucene,query:"+"{{search_term}}"+"),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(),schema:metric,type:count),(enabled:!t,id:'2',params:(field:textSentScore,missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:5),schema:segment,type:terms)),params:(addLegend:!t,addTooltip:!t,isDonut:!t,labels:(last_level:!t,show:!t,truncate:100,values:!t),legendPosition:bottom,type:pie),title:'tweetscount+pie',type:pie))"
-      
-  </script>
-
 
 
 </html>
