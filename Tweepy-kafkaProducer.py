@@ -107,21 +107,24 @@ producer = SimpleProducer(kafka)
 configs = ['config0.py','config1.py','config2.py','config3.py','config4.py','config5.py','config6.py']
 geo_codes = [['USA','40,-100,1600km','US'],['Japan','38,140,800km','JP'],['England','54.6974,-3.8112,350km','GB'],['Brazil','-9.8864,-50.4513,1600km','BR'],['South Africa','-30.2184,24.3814,610km','ZA'],['Australia','-34.9,145.1,1000km','AU']]
 
-# 一分钟只能一个request
-# 所以60秒钟除以config file的数量
+# Only one request is allowed per minute.
 interval = 60
 
-# 为了实现不停地循环loop列表里的信息，建立两个一直递增的index然后取余数(使用列表长度)，从而实现列表index不停循环
-# api token config file 列表
+# We would like to keep looping items in both arrays.
+# In order to do that we define two variables and make them incrementing and divide them by 
+# len of the array and take the residue. By doing this we could loop from beging to the end infinitely.
+# Two arrays we would like to loop: api token, config file
+
+
+
 config_index_no_stop = 0
-# 国家地理信息列表
+# country geo info array index big number.
 geo_info_index_no_stop = 0
 
 
 
 while True:
 
-    # 正如上文所说，取余数实现列表无限循环loop
     config_index = config_index_no_stop%len(configs)
     geo_info_index = geo_info_index_no_stop%len(geo_codes)
 
@@ -130,12 +133,14 @@ while True:
     print("--------------------------")
     print("Token: "+str(config_index), ", Country: "+geo_codes[geo_info_index][0])
     
-    # 使用try因为有可能碰到429的情况
+    # We might have 429 response which means that our twitter api time frame is used up.
     try:
         tweets_processed = get_twitter_data_token(config_index,api, geo_codes[geo_info_index])
     except Exception as e:
-        print("429了, 等下一轮吧~")
-        # 当前token不能用，不要跳到下一个国家，依旧使用当前国家
+        print("429, wait for next token")
+        # If we have a 429
+        # Then we need to use next token
+        # But do not turn to next country
         geo_info_index_no_stop -= 1
     print("Tweets processed: "+str(tweets_processed))
     time.sleep(interval)
