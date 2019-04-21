@@ -28,6 +28,9 @@ def main():
                         'timestamp': {'type': 'date'},
                         'country': {'type': 'text'},
                         'textSentScore': {'type': 'text'}
+                        'geoip':{
+                            'country_iso_code': {'type':'text'}
+                        }
                     }
                 },
             },
@@ -86,7 +89,10 @@ def main():
                     'text' : msg["text"],
                     'timestamp': msg["created_at"],
                     'country': msg["country"],
-                    'textSentScore': msg['sentimentScoreText']
+                    'textSentScore': msg['sentimentScoreText'],
+                    'geoip':{ 
+                        'country_iso_code':msg['ISO_code']
+                    }
                 }
                 es.create(index = "totaltweets6", doc_type = "tweet", id = count, body = action)
                 #print(msg["created_at"])
