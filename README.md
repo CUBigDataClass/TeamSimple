@@ -6,6 +6,8 @@ Current architecture:
 
 tweepy -> kafka -> spark -> mongodb -> elasticsearch -> kibana
 
+tweepy -> kafka -> spark -> mongodb -> elasticsearch -> Flask,d3
+
 ## Steps
 
 ### To start
