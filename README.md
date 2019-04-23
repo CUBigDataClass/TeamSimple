@@ -88,3 +88,8 @@ Stop and remove docker container for Mongo database:
 `docker container stop CONTAINER_NAME`
 
 `docker container rm CONTAINER_NAME`
+
+
+### Demo ## Architecture:
+![Screenshot](Arch.png)
+
