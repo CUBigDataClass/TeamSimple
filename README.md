@@ -91,5 +91,5 @@ Stop and remove docker container for Mongo database:
 
 
 ### Demo ## Architecture:
-![Screenshot](Arch.png)
+![Screenshot](Arch1.png)
 
