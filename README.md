@@ -1,12 +1,10 @@
 # TeamSimple
 
-Our team aims to create a real-time twitter map with emojis. Big data techniques will be used.
+Our team aims to create a real-time twitter map with emojis. Big data techniques are used.
 
 Current architecture:
 
-tweepy -> kafka -> spark -> mongodb -> elasticsearch -> kibana
-
-tweepy -> kafka -> spark -> mongodb -> elasticsearch -> Flask,d3
+![Screenshot](Arch1.png)
 
 ## Steps
 
@@ -27,6 +25,8 @@ tweepy -> kafka -> spark -> mongodb -> elasticsearch -> Flask,d3
 3. Start producer:
 
    Need to be in project folder. Couple libraries might need to be install by using pip.
+   
+   Read tweets from twitter API, then send it to kafka
 
    `python Tweepy-kafkaProducer.py`
 
@@ -35,6 +35,8 @@ tweepy -> kafka -> spark -> mongodb -> elasticsearch -> Flask,d3
    `docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4`
 
 5. Start consumer
+   
+   read the tweets from kafka to Mongodb.
 
    `python kafkaConsumerMongo.py`
 
@@ -61,7 +63,9 @@ tweepy -> kafka -> spark -> mongodb -> elasticsearch -> Flask,d3
    `source [VENVNAME]/bin/activate`
 
 3. run two Python script
-
+   
+   Search tweets and emojitweets
+   
    `python searchapp/index_tweets.py`
 
    `python searchapp/index_emojitweets.py`
@@ -91,5 +95,5 @@ Stop and remove docker container for Mongo database:
 
 
 ### Demo ## Architecture:
-![Screenshot](Arch1.png)
+
 
