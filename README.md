@@ -44,6 +44,12 @@ Current architecture:
 
    `python sentimentAnalysis-mongo.py`
 
+7. Run Spark analysis
+
+   `python sparkAnalysis_countTextSent.py`
+   
+   `python SparkSentiment.py`
+
 #### Front End
 
 **on macOS**
