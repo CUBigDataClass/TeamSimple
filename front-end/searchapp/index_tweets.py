@@ -84,7 +84,7 @@ def main():
     count = 0
     count2 = 0
     while True:
-        cursor = mycol.find({})
+        cursor = mycol.find({}, no_cursor_timeout=True)
         for msg in cursor:
         #print(msg)
             count += 1
