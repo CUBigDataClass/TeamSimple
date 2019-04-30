@@ -17,9 +17,9 @@ def main():
 
     es = Elasticsearch()
 
-    es.indices.delete(index="new_tweets3", ignore=404)
+    es.indices.delete(index="new_tweets4", ignore=404)
     es.indices.create(
-        index="new_tweets3",
+        index="new_tweets4",
         body={
             'mappings': {
                 "tweet": {
@@ -91,7 +91,7 @@ def main():
             current_primary_key = int(str(msg['_id'])[-6:],16)
             if current_primary_key > highest_previous_primary_key:
                 action = {
-                    "index": "new_tweets3",
+                    "index": "new_tweets4",
                     "type": "tweet",
                     'text' : msg["text"],
                     'timestamp': msg["created_at"],
@@ -99,7 +99,7 @@ def main():
                     'textSentScore': msg['sentimentScoreText'],
                     'location': msg['location']
                 }
-                es.create(index = "new_tweets3", doc_type = "tweet", id = count, body = action)
+                es.create(index = "new_tweets4", doc_type = "tweet", id = count, body = action)
                 #print(msg["created_at"])
                 highest_previous_primary_key = current_primary_key
 

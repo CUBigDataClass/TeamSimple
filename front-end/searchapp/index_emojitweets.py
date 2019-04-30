@@ -15,9 +15,9 @@ def main():
     emoji_sentiment = db['tweets_emoji_sentiment']
     es = Elasticsearch()
 
-    es.indices.delete(index="new_emoji3", ignore=404)
+    es.indices.delete(index="new_emoji4", ignore=404)
     es.indices.create(
-        index="new_emoji3",
+        index="new_emoji4",
         body={
             'mappings': {
                 "tweetEmoji": {
@@ -66,14 +66,14 @@ def main():
             current_primary_key2 = int(str(msg['_id'])[-6:],16)
             if current_primary_key2 > highest_previous_primary_key2:
                 action2 = {
-                    "index": "new_emoji3",
+                    "index": "new_emoji4",
                     "type": "tweetEmoji",
                     'timestamp': msg["created_at"],
                     'emoji': msg['emoji'],
                     'country': msg["country"],
                     'emojiSent': msg['sentimentEmoji']
                 }
-                es.create(index = "new_emoji3", doc_type = "tweetEmoji", id = count2, body = action2)
+                es.create(index = "new_emoji4", doc_type = "tweetEmoji", id = count2, body = action2)
                 #print(msg["created_at"])
                 highest_previous_primary_key2 = current_primary_key2
 
