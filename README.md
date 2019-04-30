@@ -1,6 +1,6 @@
 # TeamSimple
 
-Our team aims to create a real-time twitter map with emojis. Big data techniques are used.
+Our team aimed to create a real-time twitter map with emojis displaying sentiments of the selected regions for creating a data story. Big data techniques are used through out the implementation of the project.
 
 Current architecture:
 
