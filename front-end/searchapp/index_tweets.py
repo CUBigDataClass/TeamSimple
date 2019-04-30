@@ -27,7 +27,7 @@ def main():
                         'text': {'type': 'text'},
                         'timestamp': {'type': 'date'},
                         'country': {'type': 'text'},
-                        #'textSentScore': {'type': 'text'},
+                        'textSentScore': {'type': 'text'},
                         'location':{'type': "geo_point" }
                     }
                 },
@@ -89,7 +89,7 @@ def main():
                     'text' : msg["text"],
                     'timestamp': msg["created_at"],
                     'country': msg["country"],
-                    #'textSentScore': msg['sentimentScoreText'],
+                    'textSentScore': msg['sentimentScoreText'],
                     'location': msg['location']
                 }
                 es.create(index = "tweets", doc_type = "tweet", id = count, body = action)
