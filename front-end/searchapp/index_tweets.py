@@ -34,7 +34,7 @@ def main():
                                     'type': 'keyword'
                                 }
                             }
-                        }，
+                        },
                         'location':{'type': "geo_point" }
                     }
                 },
