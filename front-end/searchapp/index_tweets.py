@@ -90,6 +90,7 @@ def main():
             count += 1
             current_primary_key = int(str(msg['_id'])[-6:],16)
             if current_primary_key > highest_previous_primary_key:
+                print(count)
                 action = {
                     "index": "new_tweets4",
                     "type": "tweet",
