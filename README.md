@@ -52,6 +52,10 @@ Current architecture:
 
 **On GCP**
 
+0. change to `root` user
+
+   `sudo su`
+
 1. Start zookeeper and kafka:
 
    `cd /usr/local/kafka`
@@ -87,6 +91,10 @@ Current architecture:
 #### Front End
 
 **on macOS**
+
+0. change to `root` user
+
+   `sudo su`
 
 1. start `elasticsearch` and `kibana`
 
