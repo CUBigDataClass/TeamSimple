@@ -7,6 +7,7 @@ import datetime
 import codecs
 from tweepy import StreamListener,Stream
 import json
+from random import shuffle
 
 
 
@@ -105,6 +106,7 @@ kafka = KafkaClient("localhost:9092")
 producer = SimpleProducer(kafka)
 
 configs = ['config0.py','config1.py','config2.py','config3.py','config4.py','config5.py','config6.py']
+shuffle(configs)
 geo_codes = [['USA','40,-100,1600km',"40,-100"],['Japan','38,140,800km',"38,140"],['England','54.6974,-3.8112,350km',"54.69,-3.81"],['Brazil','-9.8864,-50.4513,1600km',"-9.88,-50.45"],['South Africa','-30.2184,24.3814,610km',"-30.22,24.38"],['Australia','-34.9,145.1,1000km',"-34.9,145.1"]]
 
 # Only one request is allowed per minute.

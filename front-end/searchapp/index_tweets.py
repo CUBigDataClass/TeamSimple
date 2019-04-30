@@ -77,7 +77,7 @@ def main():
     count = 0
     count2 = 0
     while True:
-        cursor = mycol1.find({})
+        cursor = mycol.find({})
         for msg in cursor:
         #print(msg)
             count += 1
