@@ -17,9 +17,9 @@ def main():
 
     es = Elasticsearch()
 
-    es.indices.delete(index="new_tweets", ignore=404)
+    es.indices.delete(index="new_tweets1", ignore=404)
     es.indices.create(
-        index="new_tweets",
+        index="new_tweets1",
         body={
             'mappings': {
                 "tweet": {
@@ -27,7 +27,14 @@ def main():
                         'text': {'type': 'text'},
                         'timestamp': {'type': 'date'},
                         'country': {'type': 'text'},
-                        'textSentScore': {'type': 'text'},
+                        'textSentScore': {
+                            'type': 'text',
+                            'fields': {
+                                'raw':{
+                                    'type': 'keyword'
+                                }
+                            }
+                        }，
                         'location':{'type': "geo_point" }
                     }
                 },
@@ -84,7 +91,7 @@ def main():
             current_primary_key = int(str(msg['_id'])[-6:],16)
             if current_primary_key > highest_previous_primary_key:
                 action = {
-                    "index": "new_tweets",
+                    "index": "new_tweets1",
                     "type": "tweet",
                     'text' : msg["text"],
                     'timestamp': msg["created_at"],
@@ -92,7 +99,7 @@ def main():
                     'textSentScore': msg['sentimentScoreText'],
                     'location': msg['location']
                 }
-                es.create(index = "new_tweets", doc_type = "tweet", id = count, body = action)
+                es.create(index = "new_tweets1", doc_type = "tweet", id = count, body = action)
                 #print(msg["created_at"])
                 highest_previous_primary_key = current_primary_key
 
@@ -120,8 +127,6 @@ def main():
 '''
     products = all_products()
     bulk_index_products(es, products)
-
-
 def bulk_index_products(es, products):
     def format_bulk_action(product: ProductData):
         return {
