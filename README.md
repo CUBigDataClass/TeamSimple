@@ -176,7 +176,7 @@ Current architecture:
 
 ![Screenshot](Architecture.jpeg)
 
-Overall count map sentiment analysis:
+Startingpage:
 
 ![Screenshot](screenshots/overall.png)
 
