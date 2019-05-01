@@ -7,7 +7,7 @@ Our team aimed to create a dashboard of real-time twitter map with emojis displa
 ![Screenshot](Architecture.jpeg)
 
 <details>
-  <summary><font size=4><b>Steps</b></font></summary>
+  <summary><font size=14><b>Steps</b></font></summary>
   
 ### To start
   
