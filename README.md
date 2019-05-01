@@ -6,6 +6,15 @@ Current architecture:
 
 ![Screenshot](Architecture.jpeg)
 
+Overall count map sentiment analysis:
+
+![Screenshot](overall.png)
+
+Final project description:
+
+![Screenshot](project.png)
+
+
 ## Steps
 
 ### To start
