@@ -174,7 +174,7 @@ Link to the video:
 
 Overall count map sentiment analysis:
 
-![Screenshot](overall.png)
+![Screenshot](screenshots/overall.png)
 
 Current architecture:
 
@@ -183,4 +183,4 @@ Current architecture:
 
 Final project description:
 
-![Screenshot](project.png)
+![Screenshot](screenshots/project.png)
