@@ -221,7 +221,7 @@ Project description:
 
 Link to the live Demo: http://34.83.158.245:5000
 
-Link to the video: https://www.youtube.com/watch?time_continue=1&v=nuc9oZAhIiw
+Link to the video: https://www.youtube.com/watch?v=nXnOUrYAIg8
 
 
 
