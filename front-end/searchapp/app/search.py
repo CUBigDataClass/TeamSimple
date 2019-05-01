@@ -46,10 +46,10 @@ def search(term: str):
     # not included by default in the current version of elasticsearch-py
     client.transport.connection_pool.connection.headers.update(HEADERS)
 
-    s = Search(using=client, index="new_tweets3", doc_type="tweet")
+    s = Search(using=client, index="new_tweets4", doc_type="tweet")
     docs = s.query('match', text=term)[0:10000].execute()
 
-    s_emoji = Search(using=client, index="new_emoji3", doc_type="tweetEmoji")
+    s_emoji = Search(using=client, index="new_emoji4", doc_type="tweetEmoji")
     docs_emoji = s_emoji.query('match', text=term)[0:10000].execute()
 
     return [[SearchResult.from_doc(d) for d in docs],[SearchResult_emoji.from_doc(e) for e in docs_emoji ]]
