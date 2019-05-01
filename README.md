@@ -6,7 +6,12 @@ Our team aimed to create a dashboard of real-time twitter map with emojis displa
 
 ![Screenshot](Architecture.jpeg)
 
-1. 
+<details>
+  <summary>Steps</summary>
+  <p> - 测试 测试测试</p>
+  <p> 测试二 测试三 。。。。。 .</p>
+</details>
+
 ## Steps
 
 ### To start
