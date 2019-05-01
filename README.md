@@ -172,15 +172,15 @@ Link to the live Demo:
 
 Link to the video:
 
-Overall count map sentiment analysis:
-
-![Screenshot](screenshots/overall.png)
-
 Current architecture:
 
 ![Screenshot](Architecture.jpeg)
 
+Overall count map sentiment analysis:
+
+![Screenshot](screenshots/overall.png)
 
 Final project description:
 
 ![Screenshot](screenshots/project.png)
+
