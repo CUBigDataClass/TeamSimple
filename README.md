@@ -4,16 +4,7 @@ Our team aimed to create a dashboard of real-time twitter map with emojis displa
 
 Current architecture:
 
-![Screenshot](Architecture.jpeg)
-
-Overall count map sentiment analysis:
-
-![Screenshot](overall.png)
-
-Final project description:
-
-![Screenshot](project.png)
-
+![Screenshot](Arch1.png)
 
 ## Steps
 
@@ -34,7 +25,7 @@ Final project description:
 3. Start producer:
 
    Need to be in project folder. Couple libraries might need to be install by using pip.
-
+   
    Read tweets from twitter API, then send it to kafka
 
    `python Tweepy-kafkaProducer.py`
@@ -44,7 +35,7 @@ Final project description:
    `docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4`
 
 5. Start consumer
-
+   
    read the tweets from kafka to Mongodb.
 
    `python kafkaConsumerMongo.py`
@@ -56,54 +47,12 @@ Final project description:
 7. Run Spark analysis
 
    `python sparkAnalysis_countTextSent.py`
-
+   
    `python SparkSentiment.py`
-
-**On GCP**
-
-0. change to `root` user
-
-   `sudo su`
-
-1. Start zookeeper and kafka:
-
-   `cd /usr/local/kafka`
-
-   `bin/zookeeper-server-start.sh -daemon config/zookeeper.properties `
-
-   `bin/kafka-server-start.sh -daemon config/server.properties`
-
-2. Start producer:
-
-   Need to be in project folder. Couple libraries might need to be install by using pip.
-
-   Read tweets from twitter API, then send it to kafka
-
-   `python3 ~/TeamSimple/Tweepy-kafkaProducer.py`
-
-3. Start Mongo database:
-
-   `docker container rm mongodb`
-
-   `docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4`
-
-4. Start consumer
-
-   read the tweets from kafka to Mongodb.
-
-   `python3 ~/TeamSimple/kafkaConsumerMongo.py`
-
-5. Start python script that reads tweets from tweets collection --> get emoji --> store emoji counts in emoji collection
-
-   `python3 ~/TeamSimple/sentimentAnalysis-mongo.py`
 
 #### Front End
 
 **on macOS**
-
-0. change to `root` user
-
-   `sudo su`
 
 1. start `elasticsearch` and `kibana`
 
@@ -120,9 +69,9 @@ Final project description:
    `source [VENVNAME]/bin/activate`
 
 3. run two Python script
-
+   
    Search tweets and emojitweets
-
+   
    `python searchapp/index_tweets.py`
 
    `python searchapp/index_emojitweets.py`
@@ -131,33 +80,6 @@ Final project description:
 
    `python searchapp/run.py`
 
-**On GCP**
-
-1. start `elasticsearch` and `kibana`
-
-   Run:
-
-   `sudo /etc/init.d/elasticsearch start`
-
-   `sudo /etc/init.d/kibana start`
-
-   wait for a few seconds for fully starting `elasticsearch`
-
-2. run two Python script
-
-   Search tweets and emojitweets
-
-   `cd ~/TeamSimple/front-end/searchapp`
-
-   `python3 index_tweets.py`
-
-   `python3 index_emojitweets.py`
-
-3. Run flask app:
-
-   `cd ~/TeamSimple/front-end/searchapp`
-
-   `python3 run_on_cloud.py`
 
 ### To stop:
 
@@ -180,8 +102,8 @@ Stop and remove docker container for Mongo database:
 
 ### Demo: 
 
-Link to the live Demo:
+Link to the live Demo: http://34.83.158.245:5000
 
-Link to the video:
+Link to the video:https://www.youtube.com/watch?v=nuc9oZAhIiw&feature=youtu.be
 
 
