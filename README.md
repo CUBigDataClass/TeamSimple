@@ -6,6 +6,7 @@ Our team aimed to create a dashboard of real-time twitter map with emojis displa
 
 ![Screenshot](Architecture.jpeg)
 
+1. 
 ## Steps
 
 ### To start
