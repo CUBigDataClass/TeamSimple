@@ -169,18 +169,37 @@ Stop and remove docker container for Mongo database:
 `docker container rm CONTAINER_NAME`
 
 
-### Demo: 
+All tweets count statistics:
 
-Link to the live Demo:
+![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.08.13 PM.png)
 
-Link to the video:
+All emoji count statistics:
 
+![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.08.35 PM.png)
 
-Startingpage:
+Emoji cloud:
 
-![Screenshot](screenshots/overall.png)
+![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.08.48 PM.png)
+
+Overall sentiment analysis:
+
+![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.09.03 PM.png)
+
+Tweets containing "hello" statistics:
+
+![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.11.03 PM.png)
 
 Final project description:
 
 ![Screenshot](screenshots/project.png)
+
+
+### Demo: 
+
+Link to the live Demo: http://34.83.158.245:5000
+
+Link to the video: https://www.youtube.com/watch?time_continue=1&v=nuc9oZAhIiw
+
+
+
 
