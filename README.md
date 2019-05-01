@@ -7,7 +7,7 @@ Our team aimed to create a dashboard of real-time twitter map with emojis displa
 ![Screenshot](Architecture.jpeg)
 
 <details>
-  <summary>__Steps__</summary>
+  <summary>## Steps </summary>
   ### To start
 
 #### Back End
@@ -169,7 +169,6 @@ Stop and remove docker container for Mongo database:
 `docker container rm CONTAINER_NAME`
 </details>
 
-## Steps
 
 
 
