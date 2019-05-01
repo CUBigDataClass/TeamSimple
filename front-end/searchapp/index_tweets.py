@@ -1,7 +1,5 @@
 from elasticsearch import Elasticsearch, helpers
 
-from data import all_products, ProductData
-
 from pymongo import MongoClient
 
 
