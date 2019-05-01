@@ -176,21 +176,37 @@ All tweets count statistics:
 
 All emoji count statistics:
 
-![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.08.35 PM.png)
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.08.35%20PM.png)
+
+Map of all tweets:
+
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.12.05%20PM.png)
 
 Emoji cloud:
 
-![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.08.48 PM.png)
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.08.48%20PM.png)
 
 Overall sentiment analysis:
 
-![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.09.03 PM.png)
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.09.03%20PM.png)
 
-Tweets containing "hello" statistics:
+Statistics of tweets containing "hello":
 
-![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.11.03 PM.png)
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.11.03%20PM.png)
 
-Final project description:
+Map of tweets containing "hello":
+
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.11.47%20PM.png)
+
+Overall sentiment analysis of tweets containing "hello":
+
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.11.51%20PM.png)
+
+Team members:
+
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.12.17%20PM.png)
+
+Project description:
 
 ![Screenshot](screenshots/project.png)
 
