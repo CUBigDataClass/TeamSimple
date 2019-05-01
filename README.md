@@ -168,10 +168,11 @@ Stop and remove docker container for Mongo database:
 
 `docker container rm CONTAINER_NAME`
 
+### Screenshots: 
 
 All tweets count statistics:
 
-![Screenshot](screenshots/Screen\ Shot\ 2019-04-30\ at\ 7.08.13\ PM.png)
+![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.08.13%20PM.png)
 
 All emoji count statistics:
 
