@@ -171,7 +171,7 @@ Stop and remove docker container for Mongo database:
 
 All tweets count statistics:
 
-![Screenshot](screenshots/Screen Shot 2019-04-30 at 7.08.13 PM.png)
+![Screenshot](screenshots/Screen\ Shot\ 2019-04-30\ at\ 7.08.13\ PM.png)
 
 All emoji count statistics:
 
