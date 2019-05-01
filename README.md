@@ -4,7 +4,7 @@ Our team aimed to create a dashboard of real-time twitter map with emojis displa
 
 Current architecture:
 
-![Screenshot](Architecture.jepg)
+![Screenshot](Architecture.jpeg)
 
 ## Steps
 
