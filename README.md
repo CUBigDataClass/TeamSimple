@@ -2,17 +2,6 @@
 
 Our team aimed to create a dashboard of real-time twitter map with emojis displaying sentiments of the selected regions for creating a data story. Big data techniques are used through out the implementation of the project.We utilized the following Big Data techniques from the class: Kafka, Pyspark, Mongodb, Elastic search, Kibana. Whereas for doing the sentiment analysis of the Emoji, we used Natural Language toolkit (NLTK) and used Flask framework for structuring our visual dashboard. A high level overview providing  detail on sequencing about the activities overtaken in the project is mentioned below, along with the commands on initiating and stopping the servers and running the project.   
 
-Current architecture:
-
-![Screenshot](Architecture.jpeg)
-
-Overall count map sentiment analysis:
-
-![Screenshot](overall.png)
-
-Final project description:
-
-![Screenshot](project.png)
 
 ## Steps
 
@@ -183,4 +172,15 @@ Link to the live Demo:
 
 Link to the video:
 
+Overall count map sentiment analysis:
 
+![Screenshot](overall.png)
+
+Current architecture:
+
+![Screenshot](Architecture.jpeg)
+
+
+Final project description:
+
+![Screenshot](project.png)
