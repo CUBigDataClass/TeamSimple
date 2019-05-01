@@ -186,7 +186,7 @@ Emoji cloud:
 
 ![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.08.48%20PM.png)
 
-Overall sentiment analysis:
+Overall text and emoji sentiment analysis:
 
 ![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.09.03%20PM.png)
 
@@ -198,7 +198,7 @@ Map of tweets containing "hello":
 
 ![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.11.47%20PM.png)
 
-Overall sentiment analysis of tweets containing "hello":
+Text sentiment analysis of tweets containing "hello":
 
 ![Screenshot](screenshots/Screen%20Shot%202019-04-30%20at%207.11.51%20PM.png)
 
